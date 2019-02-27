@@ -47,7 +47,7 @@ session_start();
              <?php
 if(array_key_exists("id",$_SESSION)){
  echo '<li class="nav-item">
-              <a class="nav-link" href="#">Calculations</a>
+              <a class="nav-link" href="../csv/calculate.php">Calculations</a>
             </li>
               <li class="nav-item">
               <a class="nav-link" href ="http://localhost/SIH-2019/Login/login.php?logout=1">
@@ -102,10 +102,10 @@ if(array_key_exists("id",$_SESSION)){
                 <div class="wrap-input100 input100-select">
 					<span class="label-input100">Select the region</span>
 					<div>
-						<select class="selection-2" name="Region">
-							<option>District-Wise</option>
-							<option>Block/Tehsil-Wise</option>
-							<option>Village-Wise</option>
+						<select class="selection-2" name="region">
+							<option  value=0>District-Wise</option>
+							<option  value=1 >Block/Tehsil-Wise</option>
+							<option  value=2>Village-Wise</option>
 						</select>
 					</div>
 					<span class="focus-input100"></span>
@@ -118,7 +118,7 @@ if(array_key_exists("id",$_SESSION)){
 <br>
 				<div class="file-upload-wrapper">
 					<input type="file" id="input-file-now" class="file-upload" name="fileToUpload1" />
-					<input type="number" placeholder="   Enter MIC number   " class="l1" name="mic=2">
+					<input type="number" placeholder="   Enter MIC number   " class="l1" name="mic2">
 				</div>
 				<div>
 
@@ -139,13 +139,59 @@ if(array_key_exists("id",$_SESSION)){
 			</form>
 <?php
 if($_SESSION['id']>0){
-    
+
+
+
+  /*
+
+  To add the  file name along side the csv file to know which user uploaded the file
+  $updatedfilename = $_SESSION['email'];
+
+  echo "<alert>" . $updatedfilename. "</alert>";
+
+
+  */  
+
 
 if(array_key_exists("submit",$_POST))
+
 {
+
+  
+  $mic1 = $_POST["mic1"];
+  $mic2 = $_POST["mic2"];
+
+  
+
+
+  $_SESSION['region'] = $_POST['region'];
+  $_SESSION['mic1'] =   $mic1;
+  $_SESSION['mic2'] =   $mic2;
+  
+  
+  /*
+    if ( $mic1 > $mic2 )
+    {
+      list ($mic1 , $mic2 )  = array ($mic2,$mic1);
+      
+    }*/ 
+
+    $updatedfilename1 = $_SESSION['email']; //GETTING THE CURRENT USERS EMAIL ID;
+  
+    //RENAMING THE FILE 
+    $temp = explode(".", $_FILES["fileToUpload"]["name"]);
+    $newfilename1 = $mic1 . "_" .$updatedfilename1. '.' . end($temp);
+    $temp1 = explode(".", $_FILES["fileToUpload1"]["name"]);
+    $newfilename2 = $mic2 . '_' .$updatedfilename1.'.'. end($temp1);
+
+
+
+    //move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir. $newfilename1);
+
 $target_dir = "../csv/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
+
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 
@@ -182,7 +228,12 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } 
 else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+
+
+    
+    $updatedfilename = $_SESSION['email'];
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir. $newfilename1) )
+     {
         
         echo '<br><div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert2" >
   <strong>The file has been uploaded.</strong> 
@@ -203,10 +254,11 @@ else {
 
     
     
+/*
     
 $target_file = $target_dir . basename($_FILES["fileToUpload1"]["name"]);
 $uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));*/
 
 // Check if file already exists
 if (file_exists($target_file)) {
@@ -238,7 +290,10 @@ if ($uploadOk == 0) {
     
 // if everything is ok, try to upload file
 } else {
-    if (move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file)) {
+
+ 
+
+    if (move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"],  $target_dir. $newfilename2) ){
         echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert2" >
   <strong>The file has been uploaded.</strong> 
   <button type="button" id="alert1" class="close" data-dismiss="alert" aria-label="Close">
