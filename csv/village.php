@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>DISTRICT BOX</title>
+        <title>Village Wise</title>
 
         <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,9 +20,51 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+        <style>
+        
+body{
+  font-family: 'Montserrat', sans-serif;
+  margin:0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 80vw;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+.btn {
+  flex: 1 1 auto;
+  margin: 10px;
+  padding: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+ /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+ }
+
+
+
+.btn:hover {
+  background-position: right center; /* change the direction of the change here */
+}
+
+
+.btn-4 {
+  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+}
+        </style>
+
 
 </head>
 
@@ -148,10 +190,10 @@ if(array_key_exists("id",$_SESSION))
 
         
         $dist1_array = [];
-        $dist1_array = $csv1->find_distinct_dist($daa1,1);
+        $dist1_array = $csv1->find_distinct_dist($daa1,3);
 
         $dist2_array = [];
-        $dist2_array = $csv2->find_distinct_dist($daa2,1);
+        $dist2_array = $csv2->find_distinct_dist($daa2,3);
 
       // print_r ( $dist2_array );
 
@@ -169,7 +211,7 @@ if(array_key_exists("id",$_SESSION))
                                                 <thead>
                                                         <tr class="row100 head">
                                                                 <th class="column100 column1" data-column="column1">STATE</th>
-                                                                <th class="column100 column2" data-column="column2">DISTRICT</th>
+                                                                <th class="column100 column2" data-column="column2">Village</th>
                                                                 <th class="column100 column2" data-column="column2">DEPTH</th>
                                                                 <th class="column100 column2" data-column="column2">SLOPE</th>
                                                                 <th class="column100 column2" data-column="column2">Y INTERCEPT</th>
@@ -187,15 +229,16 @@ if(array_key_exists("id",$_SESSION))
         $generated = [];
         $depth_zone1 =[];
         $depth_zone2 = [];
+        $row1 = " " ;
         $generated[] = array ('state' , 'block' , 'depth' , 'estimated' , 'inc/dec' );
         for ( $i=0 ; $i<sizeof($dist2_array) ; ++$i)
         {
                 $data1 = [];        
-                $data1 = $csv1->get_location_a($daa1,'goa',$dist1_array[$i],1);   
+                $data1 = $csv1->get_location_a($daa1,'goa',$dist1_array[$i],3);   
                 $totalsum1 = array_sum($data1);
                 
                 $data2=[];
-                $data2 = $csv1->get_location_a($daa2,'goa',$dist2_array[$i],1);  
+                $data2 = $csv1->get_location_a($daa2,'goa',$dist2_array[$i],3);  
                 $totalsum2 = array_sum($data2);
 
 
@@ -267,12 +310,12 @@ if(array_key_exists("id",$_SESSION))
                 echo "<br><<<<>>>><br>";
                 }     */
 
-                $row = $row.'<tr class="row100">
+                $row1 = $row1 .'<tr class="row100">
                 <td class="column100 column1" data-column="column1">'.$state.'</td>                
-                <td class="column100 column2" data-column="column2">'.$dist2_array[$i].'</</td>
+                <td class="column100 column2" data-column="column2">'.$dist2_array[$i].'</td>
                 <td class="column100 column2" data-column="column2">'.$depth.'</td>
                 <td class="column100 column2" data-column="column2">'.$slope.'</td>
-                <td class="column100 column2" data-column="column2">'.$y_c.'</</td>
+                <td class="column100 column2" data-column="column2">'.$y_c.'</td>
                 <td class="column100 column2" data-column="column2">'.round($estim).'</td>
                 <td class="column100 column8" data-column="column8">'.($data2[$j]-$data1[$j]).'</td>
                 </tr>' ;
@@ -353,6 +396,11 @@ if(array_key_exists("id",$_SESSION))
                 }
 
 
+                $generated_mean = [];
+
+                $generated_mean[] = array ( 'STATE'  ,  'VILLAGE'  , 'DEPTHZONE MOST COMMONLY TAPPED1' ,  'MEAN DEPTH1' , 'DEPTHZONE MOST COMMONLY TAPPED2' ,  'MEAN DEPTH2' , 'CHANGE IN DEPTH'   );
+
+
                 for ($i = 0 ; $i<sizeof($mean_depth_dist2) ; ++$i  )
                 {
                         $j1= depth_zone($depth_zone1[$i]); 
@@ -366,7 +414,9 @@ if(array_key_exists("id",$_SESSION))
                         <center><td class="column100 column2" data-column="column2">'.$j2.'</td></center>
                         <center><td class="column100 column2" data-column="column2">'.$mean_depth_dist2[$i].'</td></center>
                         <center><td class="column100 column2" data-column="column8">'. ( $mean_depth_dist2[$i] - $mean_depth_dist1[$i] ).'</td></center>
-                        </tr>';        
+                        </tr>';      
+                        
+                        $generated_mean[] = array ( ($state) , ($dist1_array[$i]) , ($j1) , ($mean_depth_dist1[$i]) , ($j2) , ($mean_depth_dist2[$i]) , ($mean_depth_dist2[$i] - $mean_depth_dist1[$i])    )  ;
                 }
 
 
@@ -381,24 +431,33 @@ if(array_key_exists("id",$_SESSION))
                 </div>';
 
                 
-                $generated_csv = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated'.'_district'.'.csv';
+                $generated_csv = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated'.'_village'.'.csv';
+                $generated_csv_mean = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated_MEAN'.'_village'.'.csv';
 
+                //VILLAGE WISE CSV FILE GENERATING
                 $output_csv = fopen($generated_csv , 'w' );
-
-
                 foreach( $generated as $files )
                 {
                         fputcsv($output_csv,$files);
                 }
-
                 fclose($output_csv);
-                echo '<a class="btn btn-1" href="'.$generated_csv.'" download >DOWNLOAD RESULT</a>';
 
-                echo $header.$row.$end;
+                //MEAN CSV FILE GENERATING
+                $output_csv1 = fopen($generated_csv_mean,'w');
+                foreach ( $generated_mean as $row )
+                {
+                        fputcsv($output_csv1,$row);
+                }
+                fclose($output_csv1);
+
+                echo $header.$row1.$end;
+                echo '<a class="btn btn-2" href=" '.$generated_csv.' " download >DOWNLOAD RESULT</a>';                
 
 
                 echo $header_mean.$row_data.$end_mean;
+                echo '<a class="btn btn-2" href="'.$generated_csv_mean.'" download >DOWNLOAD RESULT</a>';
     }
+
 
 
 

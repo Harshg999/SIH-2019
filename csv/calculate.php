@@ -18,7 +18,7 @@ session_start();
 
  if ( $t == 2 )
  {
-    include("district.php");
+    include("village.php");
  }
 ?>
 
