@@ -77,6 +77,8 @@
                     }
             
         }
+
+        $_SESSION['email'] =  $_POST['email'];
         
         
     }
