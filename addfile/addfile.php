@@ -27,6 +27,16 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+
+<style>
+svg {
+  -webkit-filter: invert(100%); /* safari 6.0 - 9.0 */
+          filter: invert(100%);
+}
+</style>
+
+
+
 </head>
 <body>
 <!---Navigation--->
@@ -46,9 +56,7 @@ session_start();
             </li>
              <?php
 if(array_key_exists("id",$_SESSION)){
- echo '<li class="nav-item">
-              <a class="nav-link" href="../csv/calculate.php">Calculations</a>
-            </li>
+ echo '
               <li class="nav-item">
               <a class="nav-link" href ="http://localhost/SIH-2019/Login/login.php?logout=1">
                  Logout
@@ -92,8 +100,7 @@ if(array_key_exists("id",$_SESSION)){
 					<div>
 						<select class="selection-2" name="State">
 							<option>None</option>
-							<option>All States</option>
-							<option>Goa</option>
+							<option  value = 'goa'>Goa</option>
 						</select>
 					</div>
 					<span class="focus-input100"></span>
@@ -104,7 +111,7 @@ if(array_key_exists("id",$_SESSION)){
 					<div>
 						<select class="selection-2" name="region">
 							<option  value=0>District-Wise</option>
-							<option  value=1 >Block/Tehsil-Wise</option>
+							<option  value=1>Block/Tehsil-Wise</option>
 							<option  value=2>Village-Wise</option>
 						</select>
 					</div>
@@ -113,12 +120,12 @@ if(array_key_exists("id",$_SESSION)){
 
 				<div class="file-upload-wrapper">
 					<input type="file" id="input-file-now" class="file-upload" name="fileToUpload" />
-					<input type="number" placeholder="   Enter MIC number   "  class="l1" name="mic1">
+					<input type="number" placeholder="   Enter MIC Year   "  class="l1" name="mic1" required>
 				</div>
 <br>
 				<div class="file-upload-wrapper">
 					<input type="file" id="input-file-now" class="file-upload" name="fileToUpload1" />
-					<input type="number" placeholder="   Enter MIC number   " class="l1" name="mic2">
+					<input type="number" placeholder="   Enter MIC Year   " class="l1" name="mic2" required>
 				</div>
 				<div>
 
@@ -154,20 +161,21 @@ if($_SESSION['id']>0){
 
 
 if(array_key_exists("submit",$_POST))
-
 {
 
   
   $mic1 = $_POST["mic1"];
-  $mic2 = $_POST["mic2"];
+  $mic2 = $_POST["mic2"];  
+ // $state = $_POST["state"];
 
-  
-
+  $mi_upload1 = FALSE;
+  $mi_upload2 = FALSE;
+  $allmi_upload = FALSE;
 
   $_SESSION['region'] = $_POST['region'];
-  $_SESSION['mic1'] =   $mic1;
+  $_SESSION['mic1'] =   $mic1; 
   $_SESSION['mic2'] =   $mic2;
-  
+ // $_SESSION['state'] = $state;
   
   /*
     if ( $mic1 > $mic2 )
@@ -197,7 +205,8 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
    
 // Check if file already exists
-if (file_exists($target_file)) {
+if (file_exists($target_file)) 
+{
     echo '<br><div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert2" >
   <strong>Sorry, file already exists.</strong> 
   <button type="button" id="alert1" class="close" data-dismiss="alert" aria-label="Close">
@@ -208,7 +217,8 @@ if (file_exists($target_file)) {
 }
 // Allow certain file formats
     
-if($imageFileType != "csv" ) {
+if($imageFileType != "csv" ) 
+{
     echo '<br><div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert2" >
   <strong>Sorry, only CSV file is allowed.</strong> 
   <button type="button" id="alert1" class="close" data-dismiss="alert" aria-label="Close">
@@ -218,7 +228,8 @@ if($imageFileType != "csv" ) {
     $uploadOk = 0;
 }
 // Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
+if ($uploadOk == 0) 
+{
     echo '<br><div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert2" >
   <strong>Sorry, your file was not uploaded.</strong> 
   <button type="button" id="alert1" class="close" data-dismiss="alert" aria-label="Close">
@@ -227,22 +238,27 @@ if ($uploadOk == 0) {
     
 // if everything is ok, try to upload file
 } 
-else {
 
-
-    
+//UPLOAD FILE 1
+else 
+{   
     $updatedfilename = $_SESSION['email'];
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir. $newfilename1) )
-     {
+    {
         
         echo '<br><div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert2" >
   <strong>The file has been uploaded.</strong> 
   <button type="button" id="alert1" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button></div>';
+
+      $mi_upload1 = TRUE;
         
         //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-    } else {
+    } 
+    
+    else 
+    {
         echo '<br><div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert2" >
   <strong>Sorry, there was an error uploading your file.</strong> 
   <button type="button" id="alert1" class="close" data-dismiss="alert" aria-label="Close">
@@ -261,7 +277,8 @@ $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));*/
 
 // Check if file already exists
-if (file_exists($target_file)) {
+if (file_exists($target_file)) 
+{
     echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert2" >
   <strong>Sorry, file already exists.</strong> 
   <button type="button" id="alert1" class="close" data-dismiss="alert" aria-label="Close">
@@ -271,7 +288,8 @@ if (file_exists($target_file)) {
     $uploadOk = 0;
 }
 // Allow certain file formats
-if($imageFileType != "csv" ) {
+if($imageFileType != "csv" ) 
+{
     echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert2" >
   <strong>Sorry, only CSV file is allowed.</strong> 
   <button type="button" id="alert1" class="close" data-dismiss="alert" aria-label="Close">
@@ -281,7 +299,8 @@ if($imageFileType != "csv" ) {
     $uploadOk = 0;
 }
 // Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
+if ($uploadOk == 0) 
+{
     echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert2" >
   <strong>Sorry, your file was not uploaded.</strong> 
   <button type="button" id="alert1" class="close" data-dismiss="alert" aria-label="Close">
@@ -289,18 +308,26 @@ if ($uploadOk == 0) {
   </button></div>';
     
 // if everything is ok, try to upload file
-} else {
+} 
 
- 
+//FILE UPLOAD 2
+else 
+{
 
-    if (move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"],  $target_dir. $newfilename2) ){
+    if (move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"],  $target_dir. $newfilename2) )
+    {
         echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert2" >
   <strong>The file has been uploaded.</strong> 
   <button type="button" id="alert1" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
                                           </div>';
-    } else {
+
+                      
+      $mi_upload2 = TRUE;
+    } 
+    else 
+    {
         echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert2" >
   <strong>Sorry, there was an error uploading your file.</strong> 
   <button type="button" id="alert1" class="close" data-dismiss="alert" aria-label="Close">
@@ -309,8 +336,34 @@ if ($uploadOk == 0) {
         
     }
 }
+
+
+if  ( ($mi_upload1 === TRUE ) and ($mi_upload2 === TRUE) )
+{
+    $allmi_upload = TRUE;
+
+    $_SESSION['allmi_upload'] = TRUE;
+
+    echo '				<div class="container-contact100-form-btn">
+    <div class="wrap-contact100-form-btn">
+      <div class="contact100-form-bgbtn"></div>
+      <a href="../csv/calculate.php">
+      <button type="submit" class="contact100-form-btn" name="submit" >
+        <span>
+          Calculate          
+          <i class="fa fa-folder" aria-hidden="true"></i>
+        </span>
+      </button>
+      </a>
+                  
+                  
+    </div>
+  </div>';
 }
-}
+
+
+}//ISSSET ENDS
+}//SESSION ENDS
 else{
     header("Location: http://localhost//SIH-2019/Homepage/homepage.php");
 }
