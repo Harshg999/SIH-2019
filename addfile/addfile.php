@@ -1,60 +1,62 @@
-<?php
-session_start();
-?>
-
 <html lang="en">
-<head>
-	<title>Form</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
 
-<style>
-svg {
-  -webkit-filter: invert(100%); /* safari 6.0 - 9.0 */
-          filter: invert(100%);
-}
-</style>
+<head>
+    <title>Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!--===============================================================================================-->
+
+    <style>
+        svg {
+            -webkit-filter: invert(100%);
+            /* safari 6.0 - 9.0 */
+            filter: invert(100%);
+        }
+    </style>
 
 
 
 </head>
+
 <body>
-<!---Navigation--->
+    <!---Navigation--->
+
     <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">TUBEWELL INFORMATION</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-             <?php
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">TUBEWELL INFORMATION</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <?php
+                        session_start();                                          
 if(array_key_exists("id",$_SESSION)){
  echo '
               <li class="nav-item">
@@ -75,76 +77,82 @@ if(array_key_exists("id",$_SESSION)){
             </li>';
                   }
   ?>
-           
-          </ul>
-        </div>
-      </div>
-    </nav>
-    
-    <!-- Bootstrap core JavaScript -->
-    <script src="http://dbms-com.stackstaging.com/almost/vendor/jquery/jquery.min.js"></script>
-    <script src="http://dbms-com.stackstaging.com/almost/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="http://dbms-com.stackstaging.com/almost/vendor/jquery/jquery.min.js"></script>
+        <script src="http://dbms-com.stackstaging.com/almost/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
     </body>
-<!---Navigation ends--->
-	<div class="container-contact100">
-		<div class="wrap-contact100">
-			<form class="contact100-form validate-form" method="post" enctype="multipart/form-data">
-				<span class="contact100-form-title">
-					Upload the files
-				</span>
+    <!---Navigation ends--->
+    <div class="container-contact100">
+        <div class="wrap-contact100">
+            <form class="contact100-form validate-form" method="post" enctype="multipart/form-data">
+                <span class="contact100-form-title">
+                    Upload the files
+                </span>
 
-				<div class="wrap-input100 input100-select">
-					<span class="label-input100">Select State</span>
-					<div>
-						<select class="selection-2" name="State">
-							<option>None</option>
-							<option  value = 'goa'>Goa</option>
-						</select>
-					</div>
-					<span class="focus-input100"></span>
-				</div>
-                
                 <div class="wrap-input100 input100-select">
-					<span class="label-input100">Select the region</span>
-					<div>
-						<select class="selection-2" name="region">
-							<option  value=0>District-Wise</option>
-							<option  value=1>Block/Tehsil-Wise</option>
-							<option  value=2>Village-Wise</option>
-						</select>
-					</div>
-					<span class="focus-input100"></span>
-				</div>
+                    <span class="label-input100">Select State</span>
+                    <div>
+                        <select class="selection-2" name="State">
+                            <option>None</option>
+                            <option value='goa'>Goa</option>
+                        </select>
+                    </div>
+                    <span class="focus-input100"></span>
+                </div>
 
-				<div class="file-upload-wrapper">
-					<input type="file" id="input-file-now" class="file-upload" name="fileToUpload" />
-					<input type="number" placeholder="   Enter MIC Year   "  class="l1" name="mic1" required>
-				</div>
-<br>
-				<div class="file-upload-wrapper">
-					<input type="file" id="input-file-now" class="file-upload" name="fileToUpload1" />
-					<input type="number" placeholder="   Enter MIC Year   " class="l1" name="mic2" required>
-				</div>
-				<div>
+                <div class="wrap-input100 input100-select">
+                    <span class="label-input100">Select the region</span>
+                    <div>
+                        <select class="selection-2" name="region">
+                            <option value=0>District-Wise</option>
+                            <option value=1>Block/Tehsil-Wise</option>
+                            <option value=2>Village-Wise</option>
+                        </select>
+                    </div>
+                    <span class="focus-input100"></span>
+                </div>
 
-				</div>
-				<div class="container-contact100-form-btn">
-					<div class="wrap-contact100-form-btn">
-						<div class="contact100-form-bgbtn"></div>
-						<button type="submit" class="contact100-form-btn" name="submit">
-							<span>
-								Upload
-								<i class="fa fa-long-arrow-up m-l-7" aria-hidden="true"></i>
-							</span>
-						</button>
-                        
-                        
-					</div>
-				</div>
-			</form>
-<?php
+                <div class="file-upload-wrapper">
+                    <input type="file" id="input-file-now" class="file-upload" name="fileToUpload" />
+                    <input type="number" placeholder="   Enter MIC Year   " class="l1" name="mic1" required>
+                </div>
+                <br>
+                <div class="file-upload-wrapper">
+                    <input type="file" id="input-file-now" class="file-upload" name="fileToUpload1" />
+                    <input type="number" placeholder="   Enter MIC Year   " class="l1" name="mic2" required>
+                </div>
+                <div>
+
+                </div>
+                <div class="container-contact100-form-btn">
+                    <label class="radio-inline">
+                        <input type="radio" name="option" value="DUGWELL" checked>DUGWELL
+                    </label>
+
+                    <label class="radio-inline">
+                        <input type="radio" name="option" value="DEEPWELL" checked>DEEPWELL
+                    </label>
+
+                    <div class="wrap-contact100-form-btn">
+                        <div class="contact100-form-bgbtn"></div>
+                        <button type="submit" class="contact100-form-btn" name="submit">
+                            <span>
+                                Upload
+                                <i class="fa fa-long-arrow-up m-l-7" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <?php
 if($_SESSION['id']>0){
 
 
@@ -160,13 +168,13 @@ if($_SESSION['id']>0){
   */  
 
 
+
 if(array_key_exists("submit",$_POST))
 {
 
   
   $mic1 = $_POST["mic1"];
   $mic2 = $_POST["mic2"];  
- // $state = $_POST["state"];
 
   $mi_upload1 = FALSE;
   $mi_upload2 = FALSE;
@@ -175,6 +183,8 @@ if(array_key_exists("submit",$_POST))
   $_SESSION['region'] = $_POST['region'];
   $_SESSION['mic1'] =   $mic1; 
   $_SESSION['mic2'] =   $mic2;
+
+  $_SESSION['well'] = $_POST['option'];
  // $_SESSION['state'] = $state;
   
   /*
@@ -347,7 +357,7 @@ if  ( ($mi_upload1 === TRUE ) and ($mi_upload2 === TRUE) )
     echo '				<div class="container-contact100-form-btn">
     <div class="wrap-contact100-form-btn">
       <div class="contact100-form-bgbtn"></div>
-      <a href="../csv/calculate.php">
+      <a href="../csv/calculate.php" target="_blank">
       <button type="submit" class="contact100-form-btn" name="submit" >
         <span>
           Calculate          
@@ -368,45 +378,46 @@ else{
     header("Location: http://localhost//SIH-2019/Homepage/homepage.php");
 }
 ?>
-		</div>
-	</div>
+        </div>
+    </div>
 
 
 
-	<div id="dropDownSelect1"></div>
+    <div id="dropDownSelect1"></div>
 
-<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-	<script>
-		$(".selection-2").select2({
-			minimumResultsForSearch: 20,
-			dropdownParent: $('#dropDownSelect1')
-		});
-	</script>
-<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script>
+        $(".selection-2").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect1')
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
 
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'UA-23581568-13');
-</script>
+        gtag('config', 'UA-23581568-13');
+    </script>
 
 </body>
+
 </html>

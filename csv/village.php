@@ -1,3 +1,20 @@
+<?php
+        
+
+$dataPoints = array( 
+	array("y" => 3373.64, "label" => "Germany" ),
+	array("y" => 2435.94, "label" => "France" ),
+	array("y" => 1842.55, "label" => "China" ),
+	array("y" => 1828.55, "label" => "Russia" ),
+	array("y" => 1039.99, "label" => "Switzerland" ),
+	array("y" => 765.215, "label" => "Japan" ),
+	array("y" => 612.453, "label" => "Netherlands" )
+);
+
+?>
+
+
+
 <html>
     <head>
         <title>Village Wise</title>
@@ -20,6 +37,30 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+
+<script>
+window.onload = function() {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "Gold Reserves"
+	},
+	axisY: {
+		title: "Gold Reserves (in tonnes)"
+	},
+	data: [{
+		type: "column",
+		yValueFormatString: "#,##0.## tonnes",
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>
+
 
 
         <style>
@@ -91,6 +132,9 @@ chart.render();
 
 </head>
 <body>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 
 
@@ -312,23 +356,23 @@ if(array_key_exists("id",$_SESSION))
 
                 switch($j)
                 {
-                        case 0: $depth =  "0-20";
+                        case 0: $depth = "0-20";
                                 break;
-                        case 1: $depth ="20-40";
+                        case 1: $depth = "20-40";
                                 break;
                         case 2: $depth = "40-60";
                                 break;
-                        case 3 : $depth = "60-70";
+                        case 3: $depth = "60-70";
                                 break;
-                        case 4:$depth ="70-90";
+                        case 4: $depth = "70-90";
                                 break;
-                        case 5:$depth ="90-110";
+                        case 5: $depth = "90-110";
                                 break;
-                        case 6:$depth ="110-130";
+                        case 6: $depth = "110-130";
                                 break;
-                        case 7:$depth =" 130-150";
+                        case 7: $depth = "130-150";
                                 break;
-                        case 8:$depth = ">150";
+                        case 8: $depth = ">150";
                                 break;
                                 
                 }
@@ -355,17 +399,33 @@ if(array_key_exists("id",$_SESSION))
 
                 $generated[] = array ($state ,$dist2_array[$i],$depth,round($estim),($data2[$j]-$data1[$j]));            
         
-                }
-
-
+               }//ENDS THE TUBEWELL CALC
+               
                
 
 
-        
-              
-      
-             
+              /*  $graph_data = array_fill( 0 , 9 , 0 );
 
+               for ( $i=0 ; $i<9; ++$i)
+               {
+                        $graph_data_inside = [];
+                        for ( $j = 0 ; $j<9 ; ++$j)
+                        {        $data1 = [];        
+                                $data1 = $csv1->get_location_a($daa1,'goa',$dist1_array[$j],3);
+
+                                $data2 = [];        
+                                $data2 = $csv2->get_location_a($daa1,'goa',$dist2_array[$j],3);
+
+                                for ( $k = 0 ; $k<sizeof($dist2_array) ; ++$k )
+                                {
+                                $graph_data_inside[] = array ($dist2_array[$k],($data2[$j]-$data1[$j]) );
+                                }
+                        }
+               }
+
+
+               print_r($graph_data_inside);
+ */
                 
 
                 }

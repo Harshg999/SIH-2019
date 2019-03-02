@@ -1,81 +1,3 @@
-<html>
-    <head>
-        <title>Block Calculations</title>
-
-        <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
-<link href="http://dbms-com.stackstaging.com/almost/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-<link href="h.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
-
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-
-        <style>
-        
-body{
-  font-family: 'Montserrat', sans-serif;
-  margin:0;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  flex-wrap: wrap;
-  width: 80vw;
-  margin: 0 auto;
-  min-height: 100vh;
-}
-.btn {
-  flex: 1 1 auto;
-  margin: 10px;
-  padding: 30px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
- /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
- }
-
-
-
-.btn:hover {
-  background-position: right center; /* change the direction of the change here */
-}
-
-
-.btn-4 {
-  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
-}
-        </style>
-     
-
-</head>
-</html>
-
 <?php
 //print_r($_SESSION);
 if(array_key_exists("id",$_SESSION))
@@ -443,6 +365,45 @@ if(array_key_exists("id",$_SESSION))
 
                 }
 
+                $graph_data = [];
+
+                
+                $total_generated_final = [];
+
+                for ($i = 0 ; $i<9 ; ++$i)
+                {
+                        $total_generated = [];
+                        for( $j = 0 ; $j<sizeof($block1_array) ; ++$j)
+                        {
+                                $data1 = 0;
+                                $data1 = $csv1->get_location_a($daa1,'goa',$block1_array[$j],2);
+
+                                $data2 = 0;
+                                $data2 = $csv1->get_location_a($daa2,'goa',$block2_array[$j],2);
+
+                                $total_generated[] = array ( "y"=>  ($data2[$i]-$data1[$i]), "label" =>  $block1_array[$j] );
+                        }
+                        $total_generated_final[] = $total_generated;
+                }
+
+
+
+                print_r($total_generated_final[0]);
+
+                
+
+
+                
+
+
+                
+
+                
+ 
+ 
+               
+ 
+
 
                 $end_mean = '
                 </tbody>
@@ -460,11 +421,13 @@ if(array_key_exists("id",$_SESSION))
                 //GENERATING THE CSV FILE
 
                 
-
+                echo $_SESSION['well'];
 
                 $generated_csv = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated'.'_block'.'.csv';
                 $generated_csv_mean = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated_MEAN'.'_mean'.'.csv';
 
+                echo '<a class="btn btn-4" href="district.php" >DISTRICT</a>';
+                echo '<a class="btn btn-4" href="village.php" >VILLAGE</a>';
                 echo '<a class="btn btn-4" href="#" >SHOW MAP</a>';
                 echo '<a class="btn btn-4" href="#" >SHOW GRAPH</a>';
                 echo '<a class="btn btn-4" href="#" >CORRELATE WITH IRRIGATION POTENTIAL</a>';
@@ -486,6 +449,8 @@ if(array_key_exists("id",$_SESSION))
                         fputcsv($output_csv1,$row1);
                 }
                 fclose($output_csv1);
+
+                
                 
                 
                    
@@ -497,6 +462,8 @@ if(array_key_exists("id",$_SESSION))
                 echo $header_mean.$row_data.$end_mean;
 
                 echo '<a class="btn btn-4" href="'.$generated_csv_mean.'" download >DOWNLOAD RESULT</a>';
+
+                
                 
         
                 
@@ -509,3 +476,105 @@ if(array_key_exists("id",$_SESSION))
 
 ?>
 
+<html>
+    <head>
+        <title>Block Calculations</title>
+
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+<link href="http://dbms-com.stackstaging.com/almost/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="h.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+        <style>
+        
+body{
+  font-family: 'Montserrat', sans-serif;
+  margin:0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 80vw;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+.btn {
+  flex: 1 1 auto;
+  margin: 10px;
+  padding: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+ /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+ }
+
+
+
+.btn:hover {
+  background-position: right center; /* change the direction of the change here */
+}
+
+
+.btn-4 {
+  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+}
+        </style>
+
+<script>
+window.onload = function() {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "DEPTH CLASS"
+	},
+	axisY: {
+		title: "INCREASE/DECREASE"
+	},
+	data: [{
+		type: "column",
+		yValueFormatString: "#,##0.## No of Tube well(s)",
+		dataPoints: <?php echo json_encode($total_generated_final[4], JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+     
+
+</head>
+</html>

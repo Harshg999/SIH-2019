@@ -1,19 +1,1 @@
 state,block,depth,estimated,inc/dec
-goa,"north goa",0-20,58,21
-goa,"north goa",20-40,71,31
-goa,"north goa"," 40-60",1,-2
-goa,"north goa",60-70,4,-1
-goa,"north goa"," 70-90",14,-5
-goa,"north goa",90-110,2,1
-goa,"north goa",110-130,2,1
-goa,"north goa"," 130-150",0,0
-goa,"north goa",>150,1,0
-goa,"south goa",0-20,0,-36
-goa,"south goa",20-40,0,0
-goa,"south goa"," 40-60",0,0
-goa,"south goa",60-70,0,0
-goa,"south goa"," 70-90",24,2
-goa,"south goa",90-110,0,-3
-goa,"south goa",110-130,0,0
-goa,"south goa"," 130-150",0,0
-goa,"south goa",>150,0,0
