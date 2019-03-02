@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>BLOCK BOX</title>
+        <title>Block Calculations</title>
 
         <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,60 +28,52 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-</head>
 
-<!---Navigation--->
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">TUBEWELL INFORMATION</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-             <?php
-if(array_key_exists("id",$_SESSION)){
- echo '<li class="nav-item">
-              <a class="nav-link" href="../csv/calculate.php">Calculations</a>
-            </li>
-              <li class="nav-item">
-              <a class="nav-link" href ="http://localhost/SIH-2019/Login/login.php?logout=1">
-                 Logout
-                  </a>
-            </li>';   
-    
+        <style>
+        
+body{
+  font-family: 'Montserrat', sans-serif;
+  margin:0;
 }
-                  else{
-                      
-                      
-                      echo '  <li class="nav-item">
-              <a class="nav-link" href="http://localhost//SIH-2019//Signup//signup.php">Register</a>
-            </li>
-              <li class="nav-item">
-              <a class="nav-link" href="http://localhost/sih-2019/Login/login.php">Login</a>
-            </li>';
-                  }
-  ?>
-           
-          </ul>
-        </div>
-      </div>
-    </nav>
-    
-    <!-- Bootstrap core JavaScript -->
-    <script src="http://dbms-com.stackstaging.com/almost/vendor/jquery/jquery.min.js"></script>
-    <script src="http://dbms-com.stackstaging.com/almost/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    
-    </body>
-<!---Navigation ends--->
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 80vw;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+.btn {
+  flex: 1 1 auto;
+  margin: 10px;
+  padding: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+ /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+ }
 
+
+
+.btn:hover {
+  background-position: right center; /* change the direction of the change here */
+}
+
+
+.btn-4 {
+  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+}
+        </style>
+     
+
+</head>
 </html>
 
 <?php
@@ -229,7 +221,8 @@ if(array_key_exists("id",$_SESSION))
                                         <table data-vertable="ver6">
                                                 <thead>
                                                         <tr class="row100 head">
-                                                                <th class="column100 column1" data-column="column1">DEPTH</th>
+                                                                <th class="column100 column1" data-column="column1">STATE</th>
+                                                                <th class="column100 column2" data-column="column2">DEPTH</th>
                                                                 <th class="column100 column2" data-column="column2">BLOCK</th>
                                                                 <th class="column100 column2" data-column="column2">SLOPE</th>
                                                                 <th class="column100 column2" data-column="column2">Y INTERCEPT</th>
@@ -336,14 +329,14 @@ if(array_key_exists("id",$_SESSION))
                 //ROW WISE UPDATION OF THE TABLE
 
                 $row = $row.'<tr class="row100">
-                <td class="column100 column1" data-column="column1">'.$depth.'</td>
-                <td class="column100 column2" data-column="column2">'.$block2_array[$i].'</</td>
+                <center><td class="column100 column1" data-column="column1">'.$state.'</td></center>
+                <td class="column100 column2" data-column="column2">'.$depth.'</td>
+                <td class="column100 column2" data-column="column2">'.$block2_array[$i].'</td>
                 <td class="column100 column2" data-column="column2">'.$slope.'</td>
-                <td class="column100 column2" data-column="column2">'.$y_c.'</</td>
+                <td class="column100 column2" data-column="column2">'.$y_c.'</td>
                 <td class="column100 column2" data-column="column2">'.round($estim).'</td>
                 <td class="column100 column8" data-column="column8">'.($data2[$j]-$data1[$j]).'</td>
                 </tr>' ;
-
                 $generated[] = array (trim($state) , trim($block1_array[$i]),trim($depth),trim(round($estim)),trim($data2[$j]-$data1[$j]));
 
               
@@ -377,7 +370,7 @@ if(array_key_exists("id",$_SESSION))
                                                         <thead>
                                                                 <tr class="row100 head">
                                                                         <center><th class="column100 column1" data-column="column1">STATE</th></center>
-                                                                        <center><th class="column100 column2" data-column="column2">DISTRICT</th></center>
+                                                                        <center><th class="column100 column2" data-column="column2">BLOCK</th></center>
                                                                         <center><th class="column100 column2" data-column="column2">MOST COMMONLY TAPPED ZONE1</th></center>
                                                                         <center><th class="column100 column2" data-column="column2">MEAN DEPTH1</th></center>
                                                                         <center><th class="column100 column2" data-column="column2">MOST COMMONLY TAPPED ZONE2</th></center>
@@ -422,7 +415,9 @@ if(array_key_exists("id",$_SESSION))
                         return $depth1;
                 }
 
+                $generated_mean = [];
 
+                $generated_mean[] = array ( 'STATE'  ,  'BLOCK'  , 'DEPTHZONE MOST COMMONLY TAPPED1' ,  'MEAN DEPTH1' , 'DEPTHZONE MOST COMMONLY TAPPED2' ,  'MEAN DEPTH2' , 'CHANGE IN DEPTH'   );
 
 
 
@@ -440,7 +435,12 @@ if(array_key_exists("id",$_SESSION))
                         <center><td class="column100 column2" data-column="column2">'.$j2.'</td></center>
                         <center><td class="column100 column2" data-column="column2">'.$mean_depth_dist2[$i].'</td></center>
                         <center><td class="column100 column8" data-column="column8">'. ( $mean_depth_dist2[$i] - $mean_depth_dist1[$i] ).'</td></center>
-                        </tr>';        
+                        </tr>';    
+                        
+                        $generated_mean[] = array ( $state , $block2_array[$i] , $j1 , $mean_depth_dist1[$i] , $j2 , $mean_depth_dist2[$i] , ( $mean_depth_dist2[$i] - $mean_depth_dist1[$i] ));    
+                        
+
+
                 }
 
 
@@ -459,40 +459,45 @@ if(array_key_exists("id",$_SESSION))
 
                 //GENERATING THE CSV FILE
 
+                
+
 
                 $generated_csv = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated'.'_block'.'.csv';
+                $generated_csv_mean = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated_MEAN'.'_mean'.'.csv';
+
+                echo '<a class="btn btn-4" href="#" >SHOW MAP</a>';
+                echo '<a class="btn btn-4" href="#" >SHOW GRAPH</a>';
+                echo '<a class="btn btn-4" href="#" >CORRELATE WITH IRRIGATION POTENTIAL</a>';
+
+                
 
                 $output_csv = fopen($generated_csv , 'w' );
-
                 foreach( $generated as $files )
                 {
                         fputcsv($output_csv,$files);
                 }
 
                 fclose($output_csv);
+
+                //MEAN CSV FILE GENERATING
+                $output_csv1 = fopen($generated_csv_mean,'w');
+                foreach ( $generated_mean as $row1 )
+                {
+                        fputcsv($output_csv1,$row1);
+                }
+                fclose($output_csv1);
                 
+                
+                   
+                echo $header.$row.$end; 
+                echo '<a class="btn btn-4" href="'.$generated_csv.'" download >DOWNLOAD RESULT</a>';
+                                         
 
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
 
-                echo '<a class="btn btn-1" href="'.$generated_csv.'" download >DOWNLOAD RESULT</a>';
-
-                echo $header.$row.$end;                           
                 echo $header_mean.$row_data.$end_mean;
+
+                echo '<a class="btn btn-4" href="'.$generated_csv_mean.'" download >DOWNLOAD RESULT</a>';
+                
         
                 
                 

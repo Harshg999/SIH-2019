@@ -1,0 +1,541 @@
+state,block,depth,estimated,inc/dec
+goa,revora,0-20,18,9
+goa,revora,20-40,0,0
+goa,revora," 40-60",0,0
+goa,revora,60-70,0,0
+goa,revora," 70-90",0,0
+goa,revora,90-110,0,0
+goa,revora,110-130,0,0
+goa,revora," 130-150",0,0
+goa,revora,>150,0,0
+goa,sircaim,0-20,2,1
+goa,sircaim,20-40,0,0
+goa,sircaim," 40-60",0,0
+goa,sircaim,60-70,0,0
+goa,sircaim," 70-90",0,0
+goa,sircaim,90-110,0,0
+goa,sircaim,110-130,0,0
+goa,sircaim," 130-150",0,0
+goa,sircaim,>150,0,0
+goa,haturli,0-20,1,0
+goa,haturli,20-40,0,0
+goa,haturli," 40-60",0,0
+goa,haturli,60-70,0,0
+goa,haturli," 70-90",0,0
+goa,haturli,90-110,0,0
+goa,haturli,110-130,0,0
+goa,haturli," 130-150",0,0
+goa,haturli,>150,0,0
+goa,mencurem,0-20,1,0
+goa,mencurem,20-40,0,0
+goa,mencurem," 40-60",0,0
+goa,mencurem,60-70,0,0
+goa,mencurem," 70-90",0,0
+goa,mencurem,90-110,0,0
+goa,mencurem,110-130,0,0
+goa,mencurem," 130-150",0,0
+goa,mencurem,>150,0,0
+goa,casnem,0-20,0,0
+goa,casnem,20-40,0,0
+goa,casnem," 40-60",0,0
+goa,casnem,60-70,0,0
+goa,casnem," 70-90",1,0
+goa,casnem,90-110,0,0
+goa,casnem,110-130,0,0
+goa,casnem," 130-150",0,0
+goa,casnem,>150,0,0
+goa,dhargalim,0-20,1,0
+goa,dhargalim,20-40,0,0
+goa,dhargalim," 40-60",0,0
+goa,dhargalim,60-70,0,0
+goa,dhargalim," 70-90",14,7
+goa,dhargalim,90-110,0,0
+goa,dhargalim,110-130,0,0
+goa,dhargalim," 130-150",0,0
+goa,dhargalim,>150,0,0
+goa,paliem,0-20,0,0
+goa,paliem,20-40,0,0
+goa,paliem," 40-60",0,0
+goa,paliem,60-70,0,0
+goa,paliem," 70-90",3,1
+goa,paliem,90-110,0,0
+goa,paliem,110-130,0,0
+goa,paliem," 130-150",0,0
+goa,paliem,>150,0,-1
+goa,poroscodem,0-20,2,0
+goa,poroscodem,20-40,0,0
+goa,poroscodem," 40-60",0,0
+goa,poroscodem,60-70,0,0
+goa,poroscodem," 70-90",0,0
+goa,poroscodem,90-110,0,0
+goa,poroscodem,110-130,0,0
+goa,poroscodem," 130-150",0,0
+goa,poroscodem,>150,0,0
+goa,adcolna,0-20,0,0
+goa,adcolna,20-40,0,0
+goa,adcolna," 40-60",0,-2
+goa,adcolna,60-70,0,-3
+goa,adcolna," 70-90",0,0
+goa,adcolna,90-110,0,0
+goa,adcolna,110-130,0,0
+goa,adcolna," 130-150",0,0
+goa,adcolna,>150,0,0
+goa,candepar,0-20,4,2
+goa,candepar,20-40,0,0
+goa,candepar," 40-60",0,0
+goa,candepar,60-70,0,0
+goa,candepar," 70-90",0,0
+goa,candepar,90-110,0,0
+goa,candepar,110-130,0,0
+goa,candepar," 130-150",0,0
+goa,candepar,>150,0,0
+goa,cuncoliem,0-20,6,3
+goa,cuncoliem,20-40,4,2
+goa,cuncoliem," 40-60",2,1
+goa,cuncoliem,60-70,0,0
+goa,cuncoliem," 70-90",0,0
+goa,cuncoliem,90-110,0,0
+goa,cuncoliem,110-130,0,0
+goa,cuncoliem," 130-150",0,0
+goa,cuncoliem,>150,0,0
+goa,curti,0-20,0,0
+goa,curti,20-40,0,0
+goa,curti," 40-60",4,2
+goa,curti,60-70,8,4
+goa,curti," 70-90",0,0
+goa,curti,90-110,0,0
+goa,curti,110-130,0,0
+goa,curti," 130-150",0,0
+goa,curti,>150,0,0
+goa,orgao,0-20,0,0
+goa,orgao,20-40,40,20
+goa,orgao," 40-60",0,0
+goa,orgao,60-70,0,-1
+goa,orgao," 70-90",0,0
+goa,orgao,90-110,0,0
+goa,orgao,110-130,2,1
+goa,orgao," 130-150",0,0
+goa,orgao,>150,0,0
+goa,"savoi verem",0-20,0,-2
+goa,"savoi verem",20-40,0,0
+goa,"savoi verem"," 40-60",0,0
+goa,"savoi verem",60-70,0,0
+goa,"savoi verem"," 70-90",2,1
+goa,"savoi verem",90-110,0,0
+goa,"savoi verem",110-130,0,0
+goa,"savoi verem"," 130-150",0,0
+goa,"savoi verem",>150,0,0
+goa,usgao,0-20,0,-3
+goa,usgao,20-40,0,-1
+goa,usgao," 40-60",0,-1
+goa,usgao,60-70,0,0
+goa,usgao," 70-90",0,-6
+goa,usgao,90-110,2,1
+goa,usgao,110-130,0,0
+goa,usgao," 130-150",0,0
+goa,usgao,>150,0,0
+goa,advoi,0-20,0,0
+goa,advoi,20-40,0,-2
+goa,advoi," 40-60",0,-1
+goa,advoi,60-70,0,0
+goa,advoi," 70-90",2,1
+goa,advoi,90-110,0,0
+goa,advoi,110-130,0,0
+goa,advoi," 130-150",0,0
+goa,advoi,>150,0,0
+goa,ansolim,0-20,2,1
+goa,ansolim,20-40,0,0
+goa,ansolim," 40-60",0,0
+goa,ansolim,60-70,0,-1
+goa,ansolim," 70-90",0,0
+goa,ansolim,90-110,0,0
+goa,ansolim,110-130,0,0
+goa,ansolim," 130-150",0,0
+goa,ansolim,>150,0,0
+goa,buimpal,0-20,0,0
+goa,buimpal,20-40,2,1
+goa,buimpal," 40-60",0,0
+goa,buimpal,60-70,0,0
+goa,buimpal," 70-90",2,1
+goa,buimpal,90-110,0,0
+goa,buimpal,110-130,0,0
+goa,buimpal," 130-150",0,0
+goa,buimpal,>150,2,1
+goa,choraundem,0-20,2,1
+goa,choraundem,20-40,0,0
+goa,choraundem," 40-60",0,0
+goa,choraundem,60-70,0,0
+goa,choraundem," 70-90",0,-1
+goa,choraundem,90-110,0,0
+goa,choraundem,110-130,0,0
+goa,choraundem," 130-150",0,0
+goa,choraundem,>150,0,0
+goa,codiem,0-20,0,0
+goa,codiem,20-40,2,1
+goa,codiem," 40-60",0,0
+goa,codiem,60-70,0,0
+goa,codiem," 70-90",0,0
+goa,codiem,90-110,0,0
+goa,codiem,110-130,0,0
+goa,codiem," 130-150",0,0
+goa,codiem,>150,0,0
+goa,compordem,0-20,8,4
+goa,compordem,20-40,10,5
+goa,compordem," 40-60",0,0
+goa,compordem,60-70,0,0
+goa,compordem," 70-90",0,0
+goa,compordem,90-110,0,0
+goa,compordem,110-130,0,0
+goa,compordem," 130-150",0,0
+goa,compordem,>150,0,0
+goa,conquirem,0-20,0,0
+goa,conquirem,20-40,0,0
+goa,conquirem," 40-60",0,0
+goa,conquirem,60-70,0,0
+goa,conquirem," 70-90",12,6
+goa,conquirem,90-110,0,0
+goa,conquirem,110-130,0,0
+goa,conquirem," 130-150",0,0
+goa,conquirem,>150,0,0
+goa,dongurli,0-20,2,1
+goa,dongurli,20-40,0,0
+goa,dongurli," 40-60",0,0
+goa,dongurli,60-70,0,0
+goa,dongurli," 70-90",0,0
+goa,dongurli,90-110,0,0
+goa,dongurli,110-130,0,0
+goa,dongurli," 130-150",0,0
+goa,dongurli,>150,0,0
+goa,golauli,0-20,1,0
+goa,golauli,20-40,0,0
+goa,golauli," 40-60",0,0
+goa,golauli,60-70,0,0
+goa,golauli," 70-90",0,0
+goa,golauli,90-110,0,0
+goa,golauli,110-130,0,0
+goa,golauli," 130-150",0,0
+goa,golauli,>150,0,0
+goa,karambolim,0-20,0,0
+goa,karambolim,20-40,0,0
+goa,karambolim," 40-60",0,0
+goa,karambolim,60-70,0,0
+goa,karambolim," 70-90",0,-5
+goa,karambolim,90-110,0,0
+goa,karambolim,110-130,0,0
+goa,karambolim," 130-150",0,0
+goa,karambolim,>150,0,0
+goa,mauzi,0-20,0,0
+goa,mauzi,20-40,0,0
+goa,mauzi," 40-60",0,0
+goa,mauzi,60-70,0,0
+goa,mauzi," 70-90",0,-3
+goa,mauzi,90-110,0,0
+goa,mauzi,110-130,0,0
+goa,mauzi," 130-150",0,0
+goa,mauzi,>150,0,0
+goa,onda,0-20,1,0
+goa,onda,20-40,0,0
+goa,onda," 40-60",0,0
+goa,onda,60-70,0,0
+goa,onda," 70-90",0,0
+goa,onda,90-110,0,0
+goa,onda,110-130,0,0
+goa,onda," 130-150",0,0
+goa,onda,>150,0,0
+goa,ponocem,0-20,0,0
+goa,ponocem,20-40,0,0
+goa,ponocem," 40-60",0,0
+goa,ponocem,60-70,0,0
+goa,ponocem," 70-90",0,-3
+goa,ponocem,90-110,0,0
+goa,ponocem,110-130,0,0
+goa,ponocem," 130-150",0,0
+goa,ponocem,>150,0,0
+goa,rivem,0-20,0,0
+goa,rivem,20-40,0,0
+goa,rivem," 40-60",0,0
+goa,rivem,60-70,0,0
+goa,rivem," 70-90",0,0
+goa,rivem,90-110,0,0
+goa,rivem,110-130,0,0
+goa,rivem," 130-150",0,0
+goa,rivem,>150,0,0
+goa,saleli,0-20,8,4
+goa,saleli,20-40,0,0
+goa,saleli," 40-60",0,0
+goa,saleli,60-70,0,0
+goa,saleli," 70-90",0,0
+goa,saleli,90-110,0,0
+goa,saleli,110-130,0,0
+goa,saleli," 130-150",0,0
+goa,saleli,>150,0,0
+goa,satorem,0-20,0,0
+goa,satorem,20-40,2,1
+goa,satorem," 40-60",0,0
+goa,satorem,60-70,0,0
+goa,satorem," 70-90",0,-4
+goa,satorem,90-110,0,0
+goa,satorem,110-130,0,0
+goa,satorem," 130-150",0,0
+goa,satorem,>150,0,0
+goa,sigonem,0-20,0,0
+goa,sigonem,20-40,3,1
+goa,sigonem," 40-60",0,-1
+goa,sigonem,60-70,0,0
+goa,sigonem," 70-90",0,0
+goa,sigonem,90-110,0,0
+goa,sigonem,110-130,0,0
+goa,sigonem," 130-150",0,0
+goa,sigonem,>150,0,0
+goa,brahma-karmali,0-20,2,1
+goa,brahma-karmali,20-40,2,1
+goa,brahma-karmali," 40-60",0,0
+goa,brahma-karmali,60-70,0,0
+goa,brahma-karmali," 70-90",0,0
+goa,brahma-karmali,90-110,0,0
+goa,brahma-karmali,110-130,0,0
+goa,brahma-karmali," 130-150",0,0
+goa,brahma-karmali,>150,0,0
+goa,charavnem,0-20,0,-1
+goa,charavnem,20-40,0,0
+goa,charavnem," 40-60",0,0
+goa,charavnem,60-70,0,0
+goa,charavnem," 70-90",0,0
+goa,charavnem,90-110,0,0
+goa,charavnem,110-130,0,0
+goa,charavnem," 130-150",0,0
+goa,charavnem,>150,0,0
+goa,copardem,0-20,1,0
+goa,copardem,20-40,0,0
+goa,copardem," 40-60",0,0
+goa,copardem,60-70,0,0
+goa,copardem," 70-90",0,0
+goa,copardem,90-110,0,0
+goa,copardem,110-130,0,0
+goa,copardem," 130-150",0,0
+goa,copardem,>150,0,0
+goa,cotorem,0-20,0,0
+goa,cotorem,20-40,2,1
+goa,cotorem," 40-60",0,0
+goa,cotorem,60-70,0,0
+goa,cotorem," 70-90",0,0
+goa,cotorem,90-110,0,0
+goa,cotorem,110-130,0,0
+goa,cotorem," 130-150",0,0
+goa,cotorem,>150,0,0
+goa,naneli,0-20,0,0
+goa,naneli,20-40,2,1
+goa,naneli," 40-60",0,0
+goa,naneli,60-70,0,0
+goa,naneli," 70-90",0,0
+goa,naneli,90-110,0,0
+goa,naneli,110-130,0,0
+goa,naneli," 130-150",0,0
+goa,naneli,>150,0,0
+goa,pale,0-20,0,0
+goa,pale,20-40,2,0
+goa,pale," 40-60",0,0
+goa,pale,60-70,0,0
+goa,pale," 70-90",0,0
+goa,pale,90-110,0,0
+goa,pale,110-130,0,0
+goa,pale," 130-150",0,0
+goa,pale,>150,0,0
+goa,"sonus vonvoliem",0-20,1,0
+goa,"sonus vonvoliem",20-40,0,0
+goa,"sonus vonvoliem"," 40-60",0,0
+goa,"sonus vonvoliem",60-70,0,0
+goa,"sonus vonvoliem"," 70-90",0,0
+goa,"sonus vonvoliem",90-110,0,0
+goa,"sonus vonvoliem",110-130,0,0
+goa,"sonus vonvoliem"," 130-150",0,0
+goa,"sonus vonvoliem",>150,0,0
+goa,mercurim,0-20,1,0
+goa,mercurim,20-40,0,0
+goa,mercurim," 40-60",0,0
+goa,mercurim,60-70,0,0
+goa,mercurim," 70-90",0,0
+goa,mercurim,90-110,0,0
+goa,mercurim,110-130,0,0
+goa,mercurim," 130-150",0,0
+goa,mercurim,>150,0,0
+goa,cola,0-20,0,-11
+goa,cola,20-40,0,0
+goa,cola," 40-60",0,0
+goa,cola,60-70,0,0
+goa,cola," 70-90",0,0
+goa,cola,90-110,0,0
+goa,cola,110-130,0,0
+goa,cola," 130-150",0,0
+goa,cola,>150,0,0
+goa,cotigao,0-20,0,-35
+goa,cotigao,20-40,0,0
+goa,cotigao," 40-60",0,0
+goa,cotigao,60-70,0,0
+goa,cotigao," 70-90",4,0
+goa,cotigao,90-110,0,-3
+goa,cotigao,110-130,0,0
+goa,cotigao," 130-150",0,0
+goa,cotigao,>150,0,0
+goa,gaondongrem,0-20,0,0
+goa,gaondongrem,20-40,0,0
+goa,gaondongrem," 40-60",0,0
+goa,gaondongrem,60-70,0,0
+goa,gaondongrem," 70-90",6,3
+goa,gaondongrem,90-110,0,0
+goa,gaondongrem,110-130,0,0
+goa,gaondongrem," 130-150",0,0
+goa,gaondongrem,>150,0,0
+goa,loliem-polem,0-20,0,0
+goa,loliem-polem,20-40,0,0
+goa,loliem-polem," 40-60",0,0
+goa,loliem-polem,60-70,0,0
+goa,loliem-polem," 70-90",0,-7
+goa,loliem-polem,90-110,0,0
+goa,loliem-polem,110-130,0,0
+goa,loliem-polem," 130-150",0,0
+goa,loliem-polem,>150,0,0
+goa,nagorcem/palolem,0-20,6,3
+goa,nagorcem/palolem,20-40,0,0
+goa,nagorcem/palolem," 40-60",0,0
+goa,nagorcem/palolem,60-70,0,0
+goa,nagorcem/palolem," 70-90",6,1
+goa,nagorcem/palolem,90-110,0,0
+goa,nagorcem/palolem,110-130,0,0
+goa,nagorcem/palolem," 130-150",0,0
+goa,nagorcem/palolem,>150,0,0
+goa,poinguinim,0-20,0,-2
+goa,poinguinim,20-40,0,0
+goa,poinguinim," 40-60",0,0
+goa,poinguinim,60-70,0,0
+goa,poinguinim," 70-90",2,1
+goa,poinguinim,90-110,0,0
+goa,poinguinim,110-130,0,0
+goa,poinguinim," 130-150",0,0
+goa,poinguinim,>150,0,0
+goa,shristhal,0-20,1,0
+goa,shristhal,20-40,0,0
+goa,shristhal," 40-60",0,0
+goa,shristhal,60-70,0,0
+goa,shristhal," 70-90",10,5
+goa,shristhal,90-110,0,0
+goa,shristhal,110-130,0,0
+goa,shristhal," 130-150",0,0
+goa,shristhal,>150,0,0
+goa,piliem,0-20,2,1
+goa,piliem,20-40,0,0
+goa,piliem," 40-60",0,0
+goa,piliem,60-70,0,0
+goa,piliem," 70-90",2,1
+goa,piliem,90-110,0,0
+goa,piliem,110-130,0,0
+goa,piliem," 130-150",0,0
+goa,piliem,>150,0,0
+goa,mormugao,0-20,2,1
+goa,mormugao,20-40,0,0
+goa,mormugao," 40-60",0,0
+goa,mormugao,60-70,0,0
+goa,mormugao," 70-90",0,-1
+goa,mormugao,90-110,0,0
+goa,mormugao,110-130,0,0
+goa,mormugao," 130-150",0,0
+goa,mormugao,>150,0,0
+goa,quelossim,0-20,0,0
+goa,quelossim,20-40,0,0
+goa,quelossim," 40-60",0,0
+goa,quelossim,60-70,0,0
+goa,quelossim," 70-90",0,-2
+goa,quelossim,90-110,0,0
+goa,quelossim,110-130,0,0
+goa,quelossim," 130-150",0,0
+goa,quelossim,>150,0,0
+goa,sancoale,0-20,1,-1
+goa,sancoale,20-40,0,0
+goa,sancoale," 40-60",0,0
+goa,sancoale,60-70,0,0
+goa,sancoale," 70-90",0,0
+goa,sancoale,90-110,0,0
+goa,sancoale,110-130,0,0
+goa,sancoale," 130-150",0,0
+goa,sancoale,>150,0,0
+goa,curchorem,0-20,2,1
+goa,curchorem,20-40,0,0
+goa,curchorem," 40-60",0,0
+goa,curchorem,60-70,0,0
+goa,curchorem," 70-90",0,0
+goa,curchorem,90-110,0,0
+goa,curchorem,110-130,0,0
+goa,curchorem," 130-150",0,0
+goa,curchorem,>150,0,0
+goa,sulkarna,0-20,1,0
+goa,sulkarna,20-40,0,0
+goa,sulkarna," 40-60",0,0
+goa,sulkarna,60-70,0,0
+goa,sulkarna," 70-90",2,1
+goa,sulkarna,90-110,0,0
+goa,sulkarna,110-130,0,0
+goa,sulkarna," 130-150",0,0
+goa,sulkarna,>150,0,0
+goa,cavalossim,0-20,3,1
+goa,cavalossim,20-40,0,0
+goa,cavalossim," 40-60",0,0
+goa,cavalossim,60-70,0,0
+goa,cavalossim," 70-90",0,0
+goa,cavalossim,90-110,0,0
+goa,cavalossim,110-130,0,0
+goa,cavalossim," 130-150",0,0
+goa,cavalossim,>150,0,0
+goa,dramapur,0-20,2,1
+goa,dramapur,20-40,0,0
+goa,dramapur," 40-60",0,0
+goa,dramapur,60-70,0,0
+goa,dramapur," 70-90",0,0
+goa,dramapur,90-110,0,0
+goa,dramapur,110-130,0,0
+goa,dramapur," 130-150",0,0
+goa,dramapur,>150,0,0
+goa,margao,0-20,0,-1
+goa,margao,20-40,0,0
+goa,margao," 40-60",0,0
+goa,margao,60-70,0,0
+goa,margao," 70-90",0,0
+goa,margao,90-110,0,0
+goa,margao,110-130,0,0
+goa,margao," 130-150",0,0
+goa,margao,>150,0,0
+goa,"sao jose de areal",0-20,13,6
+goa,"sao jose de areal",20-40,0,0
+goa,"sao jose de areal"," 40-60",0,0
+goa,"sao jose de areal",60-70,0,0
+goa,"sao jose de areal"," 70-90",0,0
+goa,"sao jose de areal",90-110,0,0
+goa,"sao jose de areal",110-130,0,0
+goa,"sao jose de areal"," 130-150",0,0
+goa,"sao jose de areal",>150,0,0
+goa,camorcand,0-20,1,0
+goa,camorcand,20-40,0,0
+goa,camorcand," 40-60",0,0
+goa,camorcand,60-70,0,0
+goa,camorcand," 70-90",0,0
+goa,camorcand,90-110,0,0
+goa,camorcand,110-130,0,0
+goa,camorcand," 130-150",0,0
+goa,camorcand,>150,0,0
+goa,moissal,0-20,1,0
+goa,moissal,20-40,0,0
+goa,moissal," 40-60",0,0
+goa,moissal,60-70,0,0
+goa,moissal," 70-90",2,1
+goa,moissal,90-110,0,0
+goa,moissal,110-130,0,0
+goa,moissal," 130-150",0,0
+goa,moissal,>150,0,0
+goa,sigao,0-20,0,0
+goa,sigao,20-40,0,0
+goa,sigao," 40-60",0,0
+goa,sigao,60-70,0,0
+goa,sigao," 70-90",0,-1
+goa,sigao,90-110,0,0
+goa,sigao,110-130,0,0
+goa,sigao," 130-150",0,0
+goa,sigao,>150,0,0

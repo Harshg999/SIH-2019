@@ -65,10 +65,34 @@ body{
 }
         </style>
 
+<script>
+window.onload = function () {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	title: {
+		text: "Top 10 Google Play Categories - till 2017"
+	},
+	axisY: {
+		title: "Number of Apps",
+		includeZero: false
+	},
+	data: [{
+		type: "column",
+                dataPoints: <?php echo $dataPoints; ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>
+
 
 </head>
+<body>
 
-</html>
+
 
 <?php
 //print_r($_SESSION);
@@ -211,7 +235,7 @@ if(array_key_exists("id",$_SESSION))
                                                 <thead>
                                                         <tr class="row100 head">
                                                                 <th class="column100 column1" data-column="column1">STATE</th>
-                                                                <th class="column100 column2" data-column="column2">Village</th>
+                                                                <th class="column100 column2" data-column="column2">VILLAGE</th>
                                                                 <th class="column100 column2" data-column="column2">DEPTH</th>
                                                                 <th class="column100 column2" data-column="column2">SLOPE</th>
                                                                 <th class="column100 column2" data-column="column2">Y INTERCEPT</th>
@@ -229,10 +253,18 @@ if(array_key_exists("id",$_SESSION))
         $generated = [];
         $depth_zone1 =[];
         $depth_zone2 = [];
+        $depth_classwise_per1 =[];
+        $depth_classwise_per2 =[];
+        
         $row1 = " " ;
+
+        $data_points_village = [];
         $generated[] = array ('state' , 'block' , 'depth' , 'estimated' , 'inc/dec' );
         for ( $i=0 ; $i<sizeof($dist2_array) ; ++$i)
         {
+
+                $depth_percentage1 = [];
+                $depth_percentage2 = [];
                 $data1 = [];        
                 $data1 = $csv1->get_location_a($daa1,'goa',$dist1_array[$i],3);   
                 $totalsum1 = array_sum($data1);
@@ -260,6 +292,7 @@ if(array_key_exists("id",$_SESSION))
                 
                 for ( $j = 0 ; $j<9 ; ++$j )
                 {
+                        
 
                 $slope=0;
                 $y_c=0;
@@ -283,11 +316,11 @@ if(array_key_exists("id",$_SESSION))
                                 break;
                         case 1: $depth ="20-40";
                                 break;
-                        case 2: $depth = " 40-60";
+                        case 2: $depth = "40-60";
                                 break;
                         case 3 : $depth = "60-70";
                                 break;
-                        case 4:$depth =" 70-90";
+                        case 4:$depth ="70-90";
                                 break;
                         case 5:$depth ="90-110";
                                 break;
@@ -320,9 +353,15 @@ if(array_key_exists("id",$_SESSION))
                 <td class="column100 column8" data-column="column8">'.($data2[$j]-$data1[$j]).'</td>
                 </tr>' ;
 
-                $generated[] = array ($state ,$dist2_array[$i],$depth,round($estim),($data2[$j]-$data1[$j]));
+                $generated[] = array ($state ,$dist2_array[$i],$depth,round($estim),($data2[$j]-$data1[$j]));            
         
                 }
+
+
+               
+
+
+        
               
       
              
@@ -330,6 +369,19 @@ if(array_key_exists("id",$_SESSION))
                 
 
                 }
+
+                $dataPoints = array(
+                        array("label"=> "Education", "y"=> 284935),
+                        array("label"=> "Entertainment", "y"=> 256548),
+                        array("label"=> "Lifestyle", "y"=> 245214),
+                        array("label"=> "Business", "y"=> 233464),
+                        array("label"=> "Music & Audio", "y"=> 200285),
+                        array("label"=> "Personalization", "y"=> 194422),
+                        array("label"=> "Tools", "y"=> 180337),
+                        array("label"=> "Books & Reference", "y"=> 172340),
+                        array("label"=> "Travel & Local", "y"=> 118187),
+                        array("label"=> "Puzzle", "y"=> 107530)
+                );
 
                 $end = '</tbody>
                 </table>
@@ -351,7 +403,7 @@ if(array_key_exists("id",$_SESSION))
                                                         <thead>
                                                                 <tr class="row100 head">
                                                                         <center><th class="column100 column1" data-column="column1">STATE</th></center>
-                                                                        <center><th class="column100 column2" data-column="column2">DISTRICT</th></center>
+                                                                        <center><th class="column100 column2" data-column="column2">VILLAGE</th></center>
                                                                         <center><th class="column100 column2" data-column="column2">MOST COMMONLY TAPPED ZONE1</th></center>
                                                                         <center><th class="column100 column2" data-column="column2">MEAN DEPTH1</th></center>
                                                                         <center><th class="column100 column2" data-column="column2">MOST COMMONLY TAPPED ZONE2</th></center>
@@ -367,7 +419,7 @@ if(array_key_exists("id",$_SESSION))
 
                 $row_data ='';
 
-                function depth_zone($j1)
+                function depth_zone($j1) 
                 {
                         $depth1 = "";
                         switch($j1)
@@ -430,7 +482,13 @@ if(array_key_exists("id",$_SESSION))
                 </div>
                 </div>';
 
-                
+
+
+
+
+
+
+
                 $generated_csv = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated'.'_village'.'.csv';
                 $generated_csv_mean = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated_MEAN'.'_village'.'.csv';
 
@@ -450,16 +508,42 @@ if(array_key_exists("id",$_SESSION))
                 }
                 fclose($output_csv1);
 
+                echo '<a class="btn btn-4" href="#" >SHOW MAP</a>';
+                echo '<a class="btn btn-4" href="#" >SHOW GRAPH</a>';
+                //echo '<a class="btn btn-4" href="#" >CORRELATE WITH IRRIGATION POTENTIAL</a>';
+
                 echo $header.$row1.$end;
-                echo '<a class="btn btn-2" href=" '.$generated_csv.' " download >DOWNLOAD RESULT</a>';                
+                echo '<a class="btn btn-4" href=" '.$generated_csv.' " download >DOWNLOAD ABOVE RESULT</a>';                
 
 
                 echo $header_mean.$row_data.$end_mean;
-                echo '<a class="btn btn-2" href="'.$generated_csv_mean.'" download >DOWNLOAD RESULT</a>';
+                echo '<a class="btn btn-4" href="'.$generated_csv_mean.'" download >DOWNLOAD ABOVE RESULT</a>';
+
+
+           //     echo $header_percentagetable1.$header_percentagetable1_row.$header_percentagetable1_footer.$row_wise_percentage1.$end_per_table;
+
+
+                //print_r($depth_classwise_per1);
+
+
+
+
+                
+
     }
 
 
 
 
 ?>
+
+
+
+
+
+
+</body>
+
+</html>
+
 
