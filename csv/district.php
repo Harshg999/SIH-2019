@@ -193,7 +193,7 @@ if(array_key_exists("id",$_SESSION))
         //$csv2->import($_FILES['file2']['tmp_name']);
 
 
-        $state = strtolower("goa");
+        $state = strtolower("bihar");
 
         
         $dist1_array = [];
@@ -201,6 +201,8 @@ if(array_key_exists("id",$_SESSION))
 
         $dist2_array = [];
         $dist2_array = $csv2->find_distinct_dist($daa2,1);
+
+        $state = $_SESSION["state"];
 
       // print_r ( $dist2_array );
 
@@ -240,17 +242,30 @@ if(array_key_exists("id",$_SESSION))
         $depth_classwise_per1 =[];
         $depth_classwise_per2 =[];
         $generated[] = array ('state' , 'block' , 'depth' , 'estimated' , 'inc/dec' );
-        for ( $i=0 ; $i<sizeof($dist2_array) ; ++$i)
+
+
+        if ( ( sizeof($dist1_array)>100 ) && ( sizeof($dist2_array)>100 ) )
+        {
+                $exe = 100;
+        }
+
+        else{
+        $exe =  min( sizeof($dist1_array) , sizeof($dist2_array) );
+        }
+        
+
+
+        for ( $i=0 ; $i<$exe; ++$i)
         {
 
                 $depth_percentage1 = [];
                 $depth_percentage2 = [];
                 $data1 = [];        
-                $data1 = $csv1->get_location_a($daa1,'goa',$dist1_array[$i],1);   
+                $data1 = $csv1->get_location_a($daa1,$state,$dist1_array[$i],1);   
                 $totalsum1 = array_sum($data1);
                 
                 $data2=[];
-                $data2 = $csv1->get_location_a($daa2,'goa',$dist2_array[$i],1);  
+                $data2 = $csv1->get_location_a($daa2,$state,$dist2_array[$i],1);  
                 $totalsum2 = array_sum($data2);
 
 
@@ -450,6 +465,30 @@ if(array_key_exists("id",$_SESSION))
                         $generated_mean[] = array ( $state , $dist2_array[$i] , $j1 , $mean_depth_dist1[$i] , $j2 , $mean_depth_dist2[$i] , ( $mean_depth_dist2[$i] - $mean_depth_dist1[$i] ));    
                 }
 
+                $graph_data = [];
+
+                
+                $total_generated_final = [];
+
+                for ($i = 0 ; $i<9 ; ++$i)
+                {
+                        $total_generated = [];
+                        for( $j = 0 ; $j<($exe) ; ++$j)
+                        {
+                                $data1 = 0;
+                                $data1 = $csv1->get_location_a($daa1,$state,$dist1_array[$j],1);
+
+                                $data2 = 0;
+                                $data2 = $csv1->get_location_a($daa2,$state,$dist2_array[$j],1);
+
+                                $total_generated[] = array ( "y"=>  ($data2[$i]-$data1[$i]), "label" =>  ($dist1_array[$j]) );
+                        }
+                        $total_generated_final[] = $total_generated;
+                }
+
+
+                $_SESSION['districtgraph'] = $total_generated_final;
+
 
                 $end_mean = '
                 </tbody>
@@ -493,9 +532,10 @@ if(array_key_exists("id",$_SESSION))
                 fclose($output_csv_per);
  */
 
-
-                echo '<a class="btn btn-4" href="#" >SHOW MAP</a>';
-                echo '<a class="btn btn-4" href="#" >SHOW GRAPH</a>';
+                echo '<a class="btn btn-4" href="block.php" >BLOCK</a>';
+                echo '<a class="btn btn-4" href="village.php" >VILLAGE</a>';
+                echo '<a class="btn btn-4" href="maps/map_village.php" target="_blank" >SHOW MAP</a>';  
+                echo '<a class="btn btn-4" href="graphs/district.php" >SHOW GRAPH</a>';  
                 //echo '<a class="btn btn-4" href="#" >CORRELATE WITH IRRIGATION POTENTIAL</a>';
                 
 
@@ -515,4 +555,40 @@ if(array_key_exists("id",$_SESSION))
 
 
 ?>
+
+
+
+<script>
+window.onload = function() {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "DEPTH CLASS"
+	},
+	axisY: {
+		title: "INCREASE/DECREASE"
+	},
+	data: [{
+		type: "column",
+		yValueFormatString: "#,##0.## No of Tube well(s)",
+		dataPoints: <?php echo json_encode($total_generated_final[0], JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script> 
+
+     
+
+</head>
+
+<body>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
 

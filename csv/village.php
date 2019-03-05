@@ -1,144 +1,5 @@
 <?php
-        
-
-$dataPoints = array( 
-	array("y" => 3373.64, "label" => "Germany" ),
-	array("y" => 2435.94, "label" => "France" ),
-	array("y" => 1842.55, "label" => "China" ),
-	array("y" => 1828.55, "label" => "Russia" ),
-	array("y" => 1039.99, "label" => "Switzerland" ),
-	array("y" => 765.215, "label" => "Japan" ),
-	array("y" => 612.453, "label" => "Netherlands" )
-);
-
-?>
-
-
-
-<html>
-    <head>
-        <title>Village Wise</title>
-
-        <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
-
-<script>
-window.onload = function() {
- 
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	theme: "light2",
-	title:{
-		text: "Gold Reserves"
-	},
-	axisY: {
-		title: "Gold Reserves (in tonnes)"
-	},
-	data: [{
-		type: "column",
-		yValueFormatString: "#,##0.## tonnes",
-		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-	}]
-});
-chart.render();
- 
-}
-</script>
-
-
-
-        <style>
-        
-body{
-  font-family: 'Montserrat', sans-serif;
-  margin:0;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  flex-wrap: wrap;
-  width: 80vw;
-  margin: 0 auto;
-  min-height: 100vh;
-}
-.btn {
-  flex: 1 1 auto;
-  margin: 10px;
-  padding: 30px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
- /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
- }
-
-
-
-.btn:hover {
-  background-position: right center; /* change the direction of the change here */
-}
-
-
-.btn-4 {
-  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
-}
-        </style>
-
-<script>
-window.onload = function () {
- 
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	theme: "light2", // "light1", "light2", "dark1", "dark2"
-	title: {
-		text: "Top 10 Google Play Categories - till 2017"
-	},
-	axisY: {
-		title: "Number of Apps",
-		includeZero: false
-	},
-	data: [{
-		type: "column",
-                dataPoints: <?php echo $dataPoints; ?>
-	}]
-});
-chart.render();
- 
-}
-</script>
-
-
-</head>
-<body>
-
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-
-
-<?php
+session_start();
 //print_r($_SESSION);
 if(array_key_exists("id",$_SESSION))
 {
@@ -254,7 +115,7 @@ if(array_key_exists("id",$_SESSION))
         //$csv2->import($_FILES['file2']['tmp_name']);
 
 
-        $state = strtolower("goa");
+        $state = strtolower("bihar");
 
         
         $dist1_array = [];
@@ -310,11 +171,11 @@ if(array_key_exists("id",$_SESSION))
                 $depth_percentage1 = [];
                 $depth_percentage2 = [];
                 $data1 = [];        
-                $data1 = $csv1->get_location_a($daa1,'goa',$dist1_array[$i],3);   
+                $data1 = $csv1->get_location_a($daa1,$state,$dist1_array[$i],3);   
                 $totalsum1 = array_sum($data1);
                 
                 $data2=[];
-                $data2 = $csv1->get_location_a($daa2,'goa',$dist2_array[$i],3);  
+                $data2 = $csv1->get_location_a($daa2,$state,$dist2_array[$i],3);  
                 $totalsum2 = array_sum($data2);
 
 
@@ -411,10 +272,10 @@ if(array_key_exists("id",$_SESSION))
                         $graph_data_inside = [];
                         for ( $j = 0 ; $j<9 ; ++$j)
                         {        $data1 = [];        
-                                $data1 = $csv1->get_location_a($daa1,'goa',$dist1_array[$j],3);
+                                $data1 = $csv1->get_location_a($daa1,$state,$dist1_array[$j],3);
 
                                 $data2 = [];        
-                                $data2 = $csv2->get_location_a($daa1,'goa',$dist2_array[$j],3);
+                                $data2 = $csv2->get_location_a($daa1,$state,$dist2_array[$j],3);
 
                                 for ( $k = 0 ; $k<sizeof($dist2_array) ; ++$k )
                                 {
@@ -430,18 +291,26 @@ if(array_key_exists("id",$_SESSION))
 
                 }
 
-                $dataPoints = array(
-                        array("label"=> "Education", "y"=> 284935),
-                        array("label"=> "Entertainment", "y"=> 256548),
-                        array("label"=> "Lifestyle", "y"=> 245214),
-                        array("label"=> "Business", "y"=> 233464),
-                        array("label"=> "Music & Audio", "y"=> 200285),
-                        array("label"=> "Personalization", "y"=> 194422),
-                        array("label"=> "Tools", "y"=> 180337),
-                        array("label"=> "Books & Reference", "y"=> 172340),
-                        array("label"=> "Travel & Local", "y"=> 118187),
-                        array("label"=> "Puzzle", "y"=> 107530)
-                );
+                $graph_data = [];
+
+                
+                $total_generated_final = [];
+
+                for ($i = 0 ; $i<9 ; ++$i)
+                {
+                        $total_generated = [];
+                        for( $j = 0 ; $j<sizeof($dist1_array) ; ++$j)
+                        {
+                                $data1 = 0;
+                                $data1 = $csv1->get_location_a($daa1,$state,$dist1_array[$j],3);
+
+                                $data2 = 0;
+                                $data2 = $csv1->get_location_a($daa2,$state,$dist2_array[$j],3);
+
+                                $total_generated[] = array ( "y"=>  ($data2[$i]-$data1[$i]), "label" =>  $dist2_array[$j] );
+                        }
+                        $total_generated_final[] = $total_generated;
+                }
 
                 $end = '</tbody>
                 </table>
@@ -552,6 +421,16 @@ if(array_key_exists("id",$_SESSION))
                 $generated_csv = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated'.'_village'.'.csv';
                 $generated_csv_mean = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated_MEAN'.'_village'.'.csv';
 
+
+                //BUTTONS
+                echo '<a class="btn btn-4" href="district.php" >DISTRICT</a>';
+                echo '<a class="btn btn-4" href="block.php" >BLOCK</a>';
+                echo '<a class="btn btn-4" href="maps/map_village.php" target="_blank" >SHOW MAP</a>';
+                echo '<a class="btn btn-4" href="#" >SHOW GRAPH</a>';
+                
+
+
+
                 //VILLAGE WISE CSV FILE GENERATING
                 $output_csv = fopen($generated_csv , 'w' );
                 foreach( $generated as $files )
@@ -568,10 +447,7 @@ if(array_key_exists("id",$_SESSION))
                 }
                 fclose($output_csv1);
 
-                echo '<a class="btn btn-4" href="#" >SHOW MAP</a>';
-                echo '<a class="btn btn-4" href="#" >SHOW GRAPH</a>';
-                //echo '<a class="btn btn-4" href="#" >CORRELATE WITH IRRIGATION POTENTIAL</a>';
-
+             
                 echo $header.$row1.$end;
                 echo '<a class="btn btn-4" href=" '.$generated_csv.' " download >DOWNLOAD ABOVE RESULT</a>';                
 
@@ -596,14 +472,111 @@ if(array_key_exists("id",$_SESSION))
 
 
 ?>
+<html>
+    <head>
+        <title>Village Calculations</title>
+
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+<link href="http://dbms-com.stackstaging.com/almost/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="h.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+        <style>
+        
+body{
+  font-family: 'Montserrat', sans-serif;
+  margin:0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 80vw;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+.btn {
+  flex: 1 1 auto;
+  margin: 10px;
+  padding: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+ /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+ }
 
 
 
+.btn:hover {
+  background-position: right center; /* change the direction of the change here */
+}
 
 
+.btn-4 {
+  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+}
+        </style>
 
+
+<script>
+window.onload = function() {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "DEPTH CLASS 0-20"
+	},
+	axisY: {
+		title: "INCREASE/DECREASE"
+	},
+	data: [{
+		type: "column",
+		yValueFormatString: "#,##0.## No of Tube well(s)",
+		dataPoints: <?php echo json_encode($total_generated_final[0], JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script> 
+
+     
+
+</head>
+
+<body>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
-
 </html>
-
-

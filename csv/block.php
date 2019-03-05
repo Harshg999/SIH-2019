@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 //print_r($_SESSION);
 if(array_key_exists("id",$_SESSION))
 {
@@ -117,7 +119,7 @@ if(array_key_exists("id",$_SESSION))
         //$csv2->import($_FILES['file2']['tmp_name']);
 
 
-        $state = strtolower("goa");
+        $state = $_SESSION["state"];
 
         //echo "UPDATED";
 
@@ -128,7 +130,7 @@ if(array_key_exists("id",$_SESSION))
         $block2_array = [];
         $block2_array = $csv2->find_distinct_dist($daa2,2);
 
-      // print_r ( $dist2_array );
+       //print_r ( $block2_array );
 
         $mean_depth_dist1 =[];
         $mean_depth_dist2 =[];
@@ -165,16 +167,27 @@ if(array_key_exists("id",$_SESSION))
         $depth_zone1 =[];
         $depth_zone2 = [];
 
+
+        if ( ( sizeof($block1_array)>100 ) && ( sizeof($block1_array)>100 ) )
+        {
+                $exe = 100;
+        }
+
+        else{
+        $exe =  min( sizeof($block1_array) , sizeof($block2_array) );
+        }
         
-        for ( $i=0 ; $i<sizeof($block2_array) ; ++$i)
+
+        
+         for ( $i=0 ; $i<$exe ; ++$i)
         {
 
                 
                 $data1 = [];        
-                $data1 = $csv1->get_location_a($daa1,'goa',$block1_array[$i],2);   
+                $data1 = $csv1->get_location_a($daa1,$state,$block1_array[$i],2);   
                 
                 $data2=[];
-                $data2 = $csv2->get_location_a($daa2,'goa',$block2_array[$i],2);  
+                $data2 = $csv2->get_location_a($daa2,$state,$block2_array[$i],2);  
 
 
                 
@@ -183,13 +196,19 @@ if(array_key_exists("id",$_SESSION))
 
 
                 
+                //print_r($data1);
+                //print_r($data2);
+                
+
+
+                
                 
                 // ==print_r($data1);
                 $mean_depth_dist1[] = mean_depth_calc($data1);
 
         
-                /* print_r($data2);    
-                echo "<br>".array_sum($data2)."<br>"; */
+                 //print_r($data2);    
+                //echo "<br>".array_sum($data2)."<br>"; 
                 $mean_depth_dist2[] = mean_depth_calc($data2);   
         
                 
@@ -237,15 +256,15 @@ if(array_key_exists("id",$_SESSION))
                                 
                 }
 
-                /*
-                echo "<br> FOR THE DISTRICT " . $dist2_array[$i];
+                
+                /* echo "<br> FOR THE DISTRICT " . $dist2_array[$i];
                 echo "<br> Slope " . $slope ;
                 echo "<br> Y Intercept" . $y_c;
                 echo "<br> Estimated in 2019:" . round($estim) ;
                 echo "<br> INCRESE/DECRESE " . ($data2[$j]-$data1[$j]);
 
-                echo "<br><<<<>>>><br>";
-                }     */
+                echo "<br><<<<>>>><br>"; */
+                  
 
 
                 //ROW WISE UPDATION OF THE TABLE
@@ -260,19 +279,19 @@ if(array_key_exists("id",$_SESSION))
                 <td class="column100 column8" data-column="column8">'.($data2[$j]-$data1[$j]).'</td>
                 </tr>' ;
                 $generated[] = array (trim($state) , trim($block1_array[$i]),trim($depth),trim(round($estim)),trim($data2[$j]-$data1[$j]));
-
-              
+        }
+                
        
-                }
+                }//BLOCK EXECUTION ENDS
         
-
+                
                 
 
                 
 
                 
 
-                }
+                 
 
                 $end = '</tbody>
                 </table>
@@ -373,13 +392,13 @@ if(array_key_exists("id",$_SESSION))
                 for ($i = 0 ; $i<9 ; ++$i)
                 {
                         $total_generated = [];
-                        for( $j = 0 ; $j<sizeof($block1_array) ; ++$j)
+                        for( $j = 0 ; $j<($exe) ; ++$j)
                         {
                                 $data1 = 0;
-                                $data1 = $csv1->get_location_a($daa1,'goa',$block1_array[$j],2);
+                                $data1 = $csv1->get_location_a($daa1,$state,$block1_array[$j],2);
 
                                 $data2 = 0;
-                                $data2 = $csv1->get_location_a($daa2,'goa',$block2_array[$j],2);
+                                $data2 = $csv1->get_location_a($daa2,$state,$block2_array[$j],2);
 
                                 $total_generated[] = array ( "y"=>  ($data2[$i]-$data1[$i]), "label" =>  $block1_array[$j] );
                         }
@@ -387,10 +406,10 @@ if(array_key_exists("id",$_SESSION))
                 }
 
 
+                $_SESSION['blockgraph'] = $total_generated_final;
 
-                print_r($total_generated_final[0]);
 
-                
+                //print_r($total_generated_final);             
 
 
                 
@@ -428,9 +447,11 @@ if(array_key_exists("id",$_SESSION))
 
                 echo '<a class="btn btn-4" href="district.php" >DISTRICT</a>';
                 echo '<a class="btn btn-4" href="village.php" >VILLAGE</a>';
-                echo '<a class="btn btn-4" href="#" >SHOW MAP</a>';
-                echo '<a class="btn btn-4" href="#" >SHOW GRAPH</a>';
-                echo '<a class="btn btn-4" href="#" >CORRELATE WITH IRRIGATION POTENTIAL</a>';
+                echo '<a class="btn btn-4" href="maps/map_village.php" target="_blank" >SHOW MAP</a>';
+                echo '<a class="btn btn-4" href="graphs/block.php" >SHOW GRAPH</a>';
+                echo '<a class="btn btn-4" href="graphs/predict.php" >BLOCKWISE PREDECTION</a>';
+
+             
 
                 
 
@@ -470,7 +491,7 @@ if(array_key_exists("id",$_SESSION))
                 
         
         
-        }
+        }//ISSET CLOSES
 
 
 
@@ -550,6 +571,7 @@ body{
 }
         </style>
 
+
 <script>
 window.onload = function() {
  
@@ -557,7 +579,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	theme: "light2",
 	title:{
-		text: "DEPTH CLASS"
+		text: "DEPTH CLASS 0-20"
 	},
 	axisY: {
 		title: "INCREASE/DECREASE"
@@ -565,16 +587,21 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	data: [{
 		type: "column",
 		yValueFormatString: "#,##0.## No of Tube well(s)",
-		dataPoints: <?php echo json_encode($total_generated_final[4], JSON_NUMERIC_CHECK); ?>
+		dataPoints: <?php echo json_encode($total_generated_final[0], JSON_NUMERIC_CHECK); ?>
 	}]
 });
 chart.render();
  
 }
-</script>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</script> 
+
      
 
 </head>
+
+<body>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
+</body>
 </html>

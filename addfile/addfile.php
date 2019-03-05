@@ -100,9 +100,10 @@ if(array_key_exists("id",$_SESSION)){
                 <div class="wrap-input100 input100-select">
                     <span class="label-input100">Select State</span>
                     <div>
-                        <select class="selection-2" name="State">
+                        <select class="selection-2" name="state">
                             <option>None</option>
-                            <option value='goa'>Goa</option>
+                            <option value="goa">Goa</option>
+                            <option value="bihar">Bihar</option>
                         </select>
                     </div>
                     <span class="focus-input100"></span>
@@ -153,8 +154,9 @@ if(array_key_exists("id",$_SESSION)){
                 </div>
             </form>
             <?php
-if($_SESSION['id']>0){
 
+
+if($_SESSION['id']>0){
 
 
   /*
@@ -172,6 +174,10 @@ if($_SESSION['id']>0){
 if(array_key_exists("submit",$_POST))
 {
 
+  $state = $_POST['state'];
+  $_SESSION['state'] = $state;
+  
+  
   
   $mic1 = $_POST["mic1"];
   $mic2 = $_POST["mic2"];  
