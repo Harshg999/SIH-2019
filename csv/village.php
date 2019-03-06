@@ -1,76 +1,5 @@
-<html>
-    <head>
-        <title>Village Wise</title>
-
-        <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
-
-
-        <style>
-        
-body{
-  font-family: 'Montserrat', sans-serif;
-  margin:0;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  flex-wrap: wrap;
-  width: 80vw;
-  margin: 0 auto;
-  min-height: 100vh;
-}
-.btn {
-  flex: 1 1 auto;
-  margin: 10px;
-  padding: 30px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
- /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
- }
-
-
-
-.btn:hover {
-  background-position: right center; /* change the direction of the change here */
-}
-
-
-.btn-4 {
-  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
-}
-        </style>
-
-
-</head>
-
-</html>
-
 <?php
+session_start();
 //print_r($_SESSION);
 if(array_key_exists("id",$_SESSION))
 {
@@ -186,7 +115,7 @@ if(array_key_exists("id",$_SESSION))
         //$csv2->import($_FILES['file2']['tmp_name']);
 
 
-        $state = strtolower("goa");
+        $state = strtolower("bihar");
 
         
         $dist1_array = [];
@@ -211,7 +140,7 @@ if(array_key_exists("id",$_SESSION))
                                                 <thead>
                                                         <tr class="row100 head">
                                                                 <th class="column100 column1" data-column="column1">STATE</th>
-                                                                <th class="column100 column2" data-column="column2">Village</th>
+                                                                <th class="column100 column2" data-column="column2">VILLAGE</th>
                                                                 <th class="column100 column2" data-column="column2">DEPTH</th>
                                                                 <th class="column100 column2" data-column="column2">SLOPE</th>
                                                                 <th class="column100 column2" data-column="column2">Y INTERCEPT</th>
@@ -229,16 +158,24 @@ if(array_key_exists("id",$_SESSION))
         $generated = [];
         $depth_zone1 =[];
         $depth_zone2 = [];
+        $depth_classwise_per1 =[];
+        $depth_classwise_per2 =[];
+        
         $row1 = " " ;
+
+        $data_points_village = [];
         $generated[] = array ('state' , 'block' , 'depth' , 'estimated' , 'inc/dec' );
         for ( $i=0 ; $i<sizeof($dist2_array) ; ++$i)
         {
+
+                $depth_percentage1 = [];
+                $depth_percentage2 = [];
                 $data1 = [];        
-                $data1 = $csv1->get_location_a($daa1,'goa',$dist1_array[$i],3);   
+                $data1 = $csv1->get_location_a($daa1,$state,$dist1_array[$i],3);   
                 $totalsum1 = array_sum($data1);
                 
                 $data2=[];
-                $data2 = $csv1->get_location_a($daa2,'goa',$dist2_array[$i],3);  
+                $data2 = $csv1->get_location_a($daa2,$state,$dist2_array[$i],3);  
                 $totalsum2 = array_sum($data2);
 
 
@@ -260,6 +197,7 @@ if(array_key_exists("id",$_SESSION))
                 
                 for ( $j = 0 ; $j<9 ; ++$j )
                 {
+                        
 
                 $slope=0;
                 $y_c=0;
@@ -279,23 +217,23 @@ if(array_key_exists("id",$_SESSION))
 
                 switch($j)
                 {
-                        case 0: $depth =  "0-20";
+                        case 0: $depth = "0-20";
                                 break;
-                        case 1: $depth ="20-40";
+                        case 1: $depth = "20-40";
                                 break;
-                        case 2: $depth = " 40-60";
+                        case 2: $depth = "40-60";
                                 break;
-                        case 3 : $depth = "60-70";
+                        case 3: $depth = "60-70";
                                 break;
-                        case 4:$depth =" 70-90";
+                        case 4: $depth = "70-90";
                                 break;
-                        case 5:$depth ="90-110";
+                        case 5: $depth = "90-110";
                                 break;
-                        case 6:$depth ="110-130";
+                        case 6: $depth = "110-130";
                                 break;
-                        case 7:$depth =" 130-150";
+                        case 7: $depth = "130-150";
                                 break;
-                        case 8:$depth = ">150";
+                        case 8: $depth = ">150";
                                 break;
                                 
                 }
@@ -320,15 +258,58 @@ if(array_key_exists("id",$_SESSION))
                 <td class="column100 column8" data-column="column8">'.($data2[$j]-$data1[$j]).'</td>
                 </tr>' ;
 
-                $generated[] = array ($state ,$dist2_array[$i],$depth,round($estim),($data2[$j]-$data1[$j]));
+                $generated[] = array ($state ,$dist2_array[$i],$depth,round($estim),($data2[$j]-$data1[$j]));            
         
-                }
-              
-      
-             
+               }//ENDS THE TUBEWELL CALC
+               
+               
 
+
+              /*  $graph_data = array_fill( 0 , 9 , 0 );
+
+               for ( $i=0 ; $i<9; ++$i)
+               {
+                        $graph_data_inside = [];
+                        for ( $j = 0 ; $j<9 ; ++$j)
+                        {        $data1 = [];        
+                                $data1 = $csv1->get_location_a($daa1,$state,$dist1_array[$j],3);
+
+                                $data2 = [];        
+                                $data2 = $csv2->get_location_a($daa1,$state,$dist2_array[$j],3);
+
+                                for ( $k = 0 ; $k<sizeof($dist2_array) ; ++$k )
+                                {
+                                $graph_data_inside[] = array ($dist2_array[$k],($data2[$j]-$data1[$j]) );
+                                }
+                        }
+               }
+
+
+               print_r($graph_data_inside);
+ */
                 
 
+                }
+
+                $graph_data = [];
+
+                
+                $total_generated_final = [];
+
+                for ($i = 0 ; $i<9 ; ++$i)
+                {
+                        $total_generated = [];
+                        for( $j = 0 ; $j<sizeof($dist1_array) ; ++$j)
+                        {
+                                $data1 = 0;
+                                $data1 = $csv1->get_location_a($daa1,$state,$dist1_array[$j],3);
+
+                                $data2 = 0;
+                                $data2 = $csv1->get_location_a($daa2,$state,$dist2_array[$j],3);
+
+                                $total_generated[] = array ( "y"=>  ($data2[$i]-$data1[$i]), "label" =>  $dist2_array[$j] );
+                        }
+                        $total_generated_final[] = $total_generated;
                 }
 
                 $end = '</tbody>
@@ -351,7 +332,7 @@ if(array_key_exists("id",$_SESSION))
                                                         <thead>
                                                                 <tr class="row100 head">
                                                                         <center><th class="column100 column1" data-column="column1">STATE</th></center>
-                                                                        <center><th class="column100 column2" data-column="column2">DISTRICT</th></center>
+                                                                        <center><th class="column100 column2" data-column="column2">VILLAGE</th></center>
                                                                         <center><th class="column100 column2" data-column="column2">MOST COMMONLY TAPPED ZONE1</th></center>
                                                                         <center><th class="column100 column2" data-column="column2">MEAN DEPTH1</th></center>
                                                                         <center><th class="column100 column2" data-column="column2">MOST COMMONLY TAPPED ZONE2</th></center>
@@ -367,7 +348,7 @@ if(array_key_exists("id",$_SESSION))
 
                 $row_data ='';
 
-                function depth_zone($j1)
+                function depth_zone($j1) 
                 {
                         $depth1 = "";
                         switch($j1)
@@ -430,9 +411,25 @@ if(array_key_exists("id",$_SESSION))
                 </div>
                 </div>';
 
-                
+
+
+
+
+
+
+
                 $generated_csv = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated'.'_village'.'.csv';
                 $generated_csv_mean = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated_MEAN'.'_village'.'.csv';
+
+
+                //BUTTONS
+                echo '<a class="btn btn-4" href="district.php" >DISTRICT</a>';
+                echo '<a class="btn btn-4" href="block.php" >BLOCK</a>';
+                echo '<a class="btn btn-4" href="maps/map_village.php" target="_blank" >SHOW MAP</a>';
+                echo '<a class="btn btn-4" href="#" >SHOW GRAPH</a>';
+                
+
+
 
                 //VILLAGE WISE CSV FILE GENERATING
                 $output_csv = fopen($generated_csv , 'w' );
@@ -450,16 +447,136 @@ if(array_key_exists("id",$_SESSION))
                 }
                 fclose($output_csv1);
 
+             
                 echo $header.$row1.$end;
-                echo '<a class="btn btn-2" href=" '.$generated_csv.' " download >DOWNLOAD RESULT</a>';                
+                echo '<a class="btn btn-4" href=" '.$generated_csv.' " download >DOWNLOAD ABOVE RESULT</a>';                
 
 
                 echo $header_mean.$row_data.$end_mean;
-                echo '<a class="btn btn-2" href="'.$generated_csv_mean.'" download >DOWNLOAD RESULT</a>';
+                echo '<a class="btn btn-4" href="'.$generated_csv_mean.'" download >DOWNLOAD ABOVE RESULT</a>';
+
+
+           //     echo $header_percentagetable1.$header_percentagetable1_row.$header_percentagetable1_footer.$row_wise_percentage1.$end_per_table;
+
+
+                //print_r($depth_classwise_per1);
+
+
+
+
+                
+
     }
 
 
 
 
 ?>
+<html>
+    <head>
+        <title>Village Calculations</title>
 
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+<link href="http://dbms-com.stackstaging.com/almost/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="h.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+        <style>
+        
+body{
+  font-family: 'Montserrat', sans-serif;
+  margin:0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 80vw;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+.btn {
+  flex: 1 1 auto;
+  margin: 10px;
+  padding: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+ /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+ }
+
+
+
+.btn:hover {
+  background-position: right center; /* change the direction of the change here */
+}
+
+
+.btn-4 {
+  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+}
+        </style>
+
+
+<script>
+window.onload = function() {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "DEPTH CLASS 0-20"
+	},
+	axisY: {
+		title: "INCREASE/DECREASE"
+	},
+	data: [{
+		type: "column",
+		yValueFormatString: "#,##0.## No of Tube well(s)",
+		dataPoints: <?php echo json_encode($total_generated_final[0], JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script> 
+
+     
+
+</head>
+
+<body>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>

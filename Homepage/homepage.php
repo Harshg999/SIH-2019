@@ -1,4 +1,5 @@
 
+
 <html lang="en">
 
   <head>
@@ -38,7 +39,15 @@
       <div class="row">
         <div class="col-sm-8">
           <h2 class="mt-4">About</h2>
-          <p>E-Medicine maintenance is mainly used for medical stores to maintain the details of medicines such as stock availability, cost, expiry date etc. and generates bill for customer’s order.This E-medicine maintainance application is so designed as to ease the work load of medical shop professionals. The main feature includes inventory and stock control, accounting, client management and checking for the expiry dates of medicines(in which a reminder pop-up will be shown 1 month prior to the expiry date).
+          <p>          
+<p>The Ministry of Water Resources, River Development and Ganga Rejuvenation is 
+          the apex body for formulation and administration of rules
+           and regulations relating to the development and regulation of the water resources in India.
+           Technical guidance, scrutiny, clearance and monitoring of the irrigation, flood control and multi-purpose projects (major/medium).
+General infrastructural, technical and research support for development.
+Providing special Central Financial Assistance for specific projects and assistance in obtaining External Finance from World Bank and other agencies.
+Overall policy formulation, planning and guidance in respect of Minor Irrigation and Command Area Development, administration and monitoring of the 
+Centrally Sponsored Schemes and promotion of Participatory Irrigation Management.
 </p>
           <p>
             <a class="btn btn-primary btn-lg" href="#">More about us &raquo;</a>

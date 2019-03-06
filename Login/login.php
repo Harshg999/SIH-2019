@@ -58,8 +58,7 @@
                         
                         if ($_POST['password'] == $row['password']) {
                             
-                            $_SESSION['id'] = $row['id'];
-                            
+                            $_SESSION['id'] = $row['id'];                            
                             
 
                             header("Location: http://localhost//SIH-2019/Homepage/homepage.php");

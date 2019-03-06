@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <html>
     <head>
         <title>DISTRICT BOX</title>
@@ -23,9 +26,55 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <style>
+        
+        body{
+          font-family: 'Montserrat', sans-serif;
+          margin:0;
+        }
+        
+        .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          align-content: center;
+          flex-wrap: wrap;
+          width: 80vw;
+          margin: 0 auto;
+          min-height: 100vh;
+        }
+        .btn {
+          flex: 1 1 auto;
+          margin: 10px;
+          padding: 30px;
+          text-align: center;
+          text-transform: uppercase;
+          transition: 0.5s;
+          background-size: 200% auto;
+          color: white;
+         /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+          box-shadow: 0 0 20px #eee;
+          border-radius: 10px;
+         }
+        
+        
+        
+        .btn:hover {
+          background-position: right center; /* change the direction of the change here */
+        }
+        
+        
+        .btn-4 {
+          background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+        }
+                </style>
+        
+
+
+
+
 
 </head>
-
 </html>
 
 <?php
@@ -144,7 +193,7 @@ if(array_key_exists("id",$_SESSION))
         //$csv2->import($_FILES['file2']['tmp_name']);
 
 
-        $state = strtolower("goa");
+        $state = strtolower("bihar");
 
         
         $dist1_array = [];
@@ -152,6 +201,8 @@ if(array_key_exists("id",$_SESSION))
 
         $dist2_array = [];
         $dist2_array = $csv2->find_distinct_dist($daa2,1);
+
+        $state = $_SESSION["state"];
 
       // print_r ( $dist2_array );
 
@@ -187,15 +238,34 @@ if(array_key_exists("id",$_SESSION))
         $generated = [];
         $depth_zone1 =[];
         $depth_zone2 = [];
+
+        $depth_classwise_per1 =[];
+        $depth_classwise_per2 =[];
         $generated[] = array ('state' , 'block' , 'depth' , 'estimated' , 'inc/dec' );
-        for ( $i=0 ; $i<sizeof($dist2_array) ; ++$i)
+
+
+        if ( ( sizeof($dist1_array)>100 ) && ( sizeof($dist2_array)>100 ) )
         {
+                $exe = 100;
+        }
+
+        else{
+        $exe =  min( sizeof($dist1_array) , sizeof($dist2_array) );
+        }
+        
+
+
+        for ( $i=0 ; $i<$exe; ++$i)
+        {
+
+                $depth_percentage1 = [];
+                $depth_percentage2 = [];
                 $data1 = [];        
-                $data1 = $csv1->get_location_a($daa1,'goa',$dist1_array[$i],1);   
+                $data1 = $csv1->get_location_a($daa1,$state,$dist1_array[$i],1);   
                 $totalsum1 = array_sum($data1);
                 
                 $data2=[];
-                $data2 = $csv1->get_location_a($daa2,'goa',$dist2_array[$i],1);  
+                $data2 = $csv1->get_location_a($daa2,$state,$dist2_array[$i],1);  
                 $totalsum2 = array_sum($data2);
 
 
@@ -217,6 +287,25 @@ if(array_key_exists("id",$_SESSION))
                 
                 for ( $j = 0 ; $j<9 ; ++$j )
                 {
+
+                        
+                        if ( $totalsum1 == 0 )
+                        {
+                                $depth_percentage1[] = 0 ;
+                        }
+                        else
+                        {
+                                $depth_percentage1[] = ($data1[$j]*100)/$totalsum1;
+                        }
+
+                        if ( $totalsum2 == 0 )
+                        {
+                                $depth_percentage2[] = 0 ;
+                        }
+                        else
+                        {
+                                $depth_percentage2[] = ($data2[$j]*100)/$totalsum2;
+                        }
 
                 $slope=0;
                 $y_c=0;
@@ -269,10 +358,10 @@ if(array_key_exists("id",$_SESSION))
 
                 $row = $row.'<tr class="row100">
                 <td class="column100 column1" data-column="column1">'.$state.'</td>                
-                <td class="column100 column2" data-column="column2">'.$dist2_array[$i].'</</td>
+                <td class="column100 column2" data-column="column2">'.$dist2_array[$i].'</td>
                 <td class="column100 column2" data-column="column2">'.$depth.'</td>
                 <td class="column100 column2" data-column="column2">'.$slope.'</td>
-                <td class="column100 column2" data-column="column2">'.$y_c.'</</td>
+                <td class="column100 column2" data-column="column2">'.$y_c.'</td>
                 <td class="column100 column2" data-column="column2">'.round($estim).'</td>
                 <td class="column100 column8" data-column="column8">'.($data2[$j]-$data1[$j]).'</td>
                 </tr>' ;
@@ -280,11 +369,15 @@ if(array_key_exists("id",$_SESSION))
                 $generated[] = array ($state ,$dist2_array[$i],$depth,round($estim),($data2[$j]-$data1[$j]));
         
                 }
-              
-      
-             
 
-                
+
+                array_push (  $depth_classwise_per1 ,$dist1_array[$i] );
+              
+                for ($k = 0 ; $k<sizeof($depth_percentage1) ; ++$k)
+                {
+                        $depth_classwise_per1[] = ( $depth_percentage1[$k] );           
+                } 
+              
 
                 }
 
@@ -352,6 +445,8 @@ if(array_key_exists("id",$_SESSION))
                         return $depth1;
                 }
 
+                $generated_mean=[];
+                $generated_mean[] = array('STATE','DISTRICT' , 'DEPTH ZONE MOST COMMONLY TAPPED1','MEAN1','DEPTH ZONE MOST COMMONLY TAPPED2','MEAN1' ,'CHANGE IN MEAN DEPTH');
 
                 for ($i = 0 ; $i<sizeof($mean_depth_dist2) ; ++$i  )
                 {
@@ -366,8 +461,33 @@ if(array_key_exists("id",$_SESSION))
                         <center><td class="column100 column2" data-column="column2">'.$j2.'</td></center>
                         <center><td class="column100 column2" data-column="column2">'.$mean_depth_dist2[$i].'</td></center>
                         <center><td class="column100 column2" data-column="column8">'. ( $mean_depth_dist2[$i] - $mean_depth_dist1[$i] ).'</td></center>
-                        </tr>';        
+                        </tr>';    
+                        $generated_mean[] = array ( $state , $dist2_array[$i] , $j1 , $mean_depth_dist1[$i] , $j2 , $mean_depth_dist2[$i] , ( $mean_depth_dist2[$i] - $mean_depth_dist1[$i] ));    
                 }
+
+                $graph_data = [];
+
+                
+                $total_generated_final = [];
+
+                for ($i = 0 ; $i<9 ; ++$i)
+                {
+                        $total_generated = [];
+                        for( $j = 0 ; $j<($exe) ; ++$j)
+                        {
+                                $data1 = 0;
+                                $data1 = $csv1->get_location_a($daa1,$state,$dist1_array[$j],1);
+
+                                $data2 = 0;
+                                $data2 = $csv1->get_location_a($daa2,$state,$dist2_array[$j],1);
+
+                                $total_generated[] = array ( "y"=>  ($data2[$i]-$data1[$i]), "label" =>  ($dist1_array[$j]) );
+                        }
+                        $total_generated_final[] = $total_generated;
+                }
+
+
+                $_SESSION['districtgraph'] = $total_generated_final;
 
 
                 $end_mean = '
@@ -381,26 +501,94 @@ if(array_key_exists("id",$_SESSION))
                 </div>';
 
                 
+
+                
+                //To download the increase / decrese file   csv             
                 $generated_csv = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generated'.'_district'.'.csv';
-
                 $output_csv = fopen($generated_csv , 'w' );
-
-
                 foreach( $generated as $files )
                 {
                         fputcsv($output_csv,$files);
                 }
-
                 fclose($output_csv);
-                echo '<a class="btn btn-1" href="'.$generated_csv.'" download >DOWNLOAD RESULT</a>';
+
+                //To download the increase / decrease mean csv
+                $generated_csv_mean = $mic1.'_'.$mic2.'_'.$_SESSION['email'].'_'.'generatedMEAN'.'_district'.'.csv';
+                $output_csv = fopen($generated_csv_mean,'w');
+                foreach ( $generated_mean as $rows)
+                {
+                        fputcsv($output_csv,$rows);
+                }
+                fclose($output_csv);
+
+
+               /*  $generated_percent1 = $mic1.'_PERCENTCHANGE'.$_SESSION['email'].'_district'.'.csv';
+                $output_csv_per = fopen($generated_percent1,'w');
+                foreach($depth_classwise_per1 as $row)
+                {
+                        fputcsv($output_csv_per,$row);
+                }
+
+                fclose($output_csv_per);
+ */
+
+                echo '<a class="btn btn-4" href="block.php" >BLOCK</a>';
+                echo '<a class="btn btn-4" href="village.php" >VILLAGE</a>';
+                echo '<a class="btn btn-4" href="maps/map_village.php" target="_blank" >SHOW MAP</a>';  
+                echo '<a class="btn btn-4" href="graphs/district.php" >SHOW GRAPH</a>';  
+                //echo '<a class="btn btn-4" href="#" >CORRELATE WITH IRRIGATION POTENTIAL</a>';
+                
 
                 echo $header.$row.$end;
+                echo '<a class="btn btn-4" href="'.$generated_csv.'" download >DOWNLOAD ABOVE RESULT</a>';
 
 
                 echo $header_mean.$row_data.$end_mean;
+                echo '<a class="btn btn-4" href="'.$generated_csv_mean.'" download >DOWNLOAD ABOVE RESULT</a>';
+
+
+
+
+//               print_r($depth_classwise_per1);
     }
 
 
 
 ?>
+
+
+
+<script>
+window.onload = function() {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "DEPTH CLASS"
+	},
+	axisY: {
+		title: "INCREASE/DECREASE"
+	},
+	data: [{
+		type: "column",
+		yValueFormatString: "#,##0.## No of Tube well(s)",
+		dataPoints: <?php echo json_encode($total_generated_final[0], JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script> 
+
+     
+
+</head>
+
+<body>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
 
